@@ -4,31 +4,41 @@ using UnityEngine;
 
 public class AnomalyRoom : MonoBehaviour
 {
-    GameObject[] preObjects;
-    GameObject[] postObjects;
+    [System.Serializable]
+    public class AnomalyPair
+    {
+        public GameObject preObject;
+        public GameObject postObject;
+    }
+    public List<AnomalyPair> anomalyPairs = new List<AnomalyPair>();
+
     private string preAnomalyTag = "AnomalyObjectPre";
     private string postAnomalyTag = "AnomalyObjectPost";
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Objects in " + gameObject.name + ":");
+
         GameObject[] preObjects = GameObject.FindGameObjectsWithTag(preAnomalyTag);
         GameObject[] postObjects = GameObject.FindGameObjectsWithTag(postAnomalyTag);
 
-        foreach (GameObject obj in preObjects)
+        foreach (GameObject preObj in preObjects)
         {
-            if (IsObjectInRoom(obj))
+            if (IsObjectInRoom(preObj))
             {
-                Debug.Log("Pre-Anomaly in " + gameObject.name + ": " + obj.name);
-            }
-        }
+                foreach (GameObject postObj in postObjects)
+                {
+                    if (IsObjectInRoom(postObj) && postObj.name == preObj.name)
+                    {
+                        anomalyPairs.Add(new AnomalyPair { preObject = preObj, postObject = postObj });
 
-        foreach (GameObject obj in postObjects)
-        {
-            if (IsObjectInRoom(obj))
-            {
-                Debug.Log("Post-Anomaly in " + gameObject.name + ": " + obj.name);
-                obj.SetActive(false); // turn it off, we have to leave it on in editor so it can be detected
+                        Debug.Log("Matched Pair in " + gameObject.name + ": " + preObj.name + " (Pre) - " + postObj.name + " (Post)");
+
+                        // Set the post object inactive
+                        postObj.SetActive(false);
+                        break;
+                    }
+                }
             }
         }
     }
@@ -46,8 +56,36 @@ public class AnomalyRoom : MonoBehaviour
             return false;
         }
     }
+
+    private float timeToUpdate = 0f;
+    private float updateTimeIncrement = 10f;
     void Update()
     {
+        if (Time.time >= timeToUpdate)
+        {
+            FlipObjectStates();
+            timeToUpdate += updateTimeIncrement;
+        }
+    }
+    private void FlipObjectStates()
+    {
+        if (anomalyPairs.Count > 0)
+        {
+            int randomIndex = Random.Range(0, anomalyPairs.Count);
+            AnomalyPair pair = anomalyPairs[randomIndex];
 
+            if (pair.preObject.activeSelf)
+            {
+                pair.preObject.SetActive(false);
+                pair.postObject.SetActive(true);
+                Debug.Log("Flipped states in " + gameObject.name + " : " + pair.preObject.name + " (Pre) - " + pair.postObject.name + " (Post)");
+            }
+            else
+            {
+                pair.preObject.SetActive(true);
+                pair.postObject.SetActive(false);
+                Debug.Log("Flipped states in "+gameObject.name+" : " + pair.preObject.name + " (Post) - " + pair.postObject.name + " (Pre)");
+            }
+        }
     }
 }
