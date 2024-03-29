@@ -373,6 +373,7 @@ public class AdvancedSettingsExampleEditor : Editor
             {
                 EditorGUI.indentLevel++;
                 anomalySettings.model_to_change = (GameObject)EditorGUILayout.ObjectField("Model To Change", anomalySettings.model_to_change, typeof(GameObject), true);
+                EditorGUI.indentLevel--;
             }
             EditorGUI.indentLevel--;
 
