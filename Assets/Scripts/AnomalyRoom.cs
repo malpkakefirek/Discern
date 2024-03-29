@@ -17,7 +17,7 @@ public class AnomalyRoom : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Objects in " + gameObject.name + ":");
+        //Debug.Log("Objects in " + gameObject.name + ":");
 
         GameObject[] preObjects = GameObject.FindGameObjectsWithTag(preAnomalyTag);
         GameObject[] postObjects = GameObject.FindGameObjectsWithTag(postAnomalyTag);
@@ -32,7 +32,7 @@ public class AnomalyRoom : MonoBehaviour
                     {
                         anomalyPairs.Add(new AnomalyPair { preObject = preObj, postObject = postObj });
 
-                        Debug.Log("Matched Pair in " + gameObject.name + ": " + preObj.name + " (Pre) - " + postObj.name + " (Post)");
+                        //Debug.Log("Matched Pair in " + gameObject.name + ": " + preObj.name + " (Pre) - " + postObj.name + " (Post)");
 
                         // Set the post object inactive
                         postObj.SetActive(false);
@@ -41,6 +41,7 @@ public class AnomalyRoom : MonoBehaviour
                 }
             }
         }
+        Debug.Log("Objects in " + gameObject.name + " : "+ anomalyPairs.Count);
     }
 
     private bool IsObjectInRoom(GameObject obj)
@@ -78,13 +79,13 @@ public class AnomalyRoom : MonoBehaviour
             {
                 pair.preObject.SetActive(false);
                 pair.postObject.SetActive(true);
-                Debug.Log("Flipped states in " + gameObject.name + " : " + pair.preObject.name + " (Pre) - " + pair.postObject.name + " (Post)");
+                //Debug.Log("Flipped states in " + gameObject.name + " : " + pair.preObject.name + " (Pre) - " + pair.postObject.name + " (Post)");
             }
             else
             {
                 pair.preObject.SetActive(true);
                 pair.postObject.SetActive(false);
-                Debug.Log("Flipped states in "+gameObject.name+" : " + pair.preObject.name + " (Post) - " + pair.postObject.name + " (Pre)");
+                //Debug.Log("Flipped states in "+gameObject.name+" : " + pair.preObject.name + " (Post) - " + pair.postObject.name + " (Pre)");
             }
         }
     }
