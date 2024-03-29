@@ -15,12 +15,10 @@ public class AnomalyRoom : MonoBehaviour
         GameObject[] preObjects = GameObject.FindGameObjectsWithTag(preAnomalyTag);
         GameObject[] postObjects = GameObject.FindGameObjectsWithTag(postAnomalyTag);
 
-        // Filter objects to those within the bounds of the room
         foreach (GameObject obj in preObjects)
         {
             if (IsObjectInRoom(obj))
             {
-                // Print the name of the pre-anomaly object in the room
                 Debug.Log("Pre-Anomaly in " + gameObject.name + ": " + obj.name);
             }
         }
@@ -29,20 +27,14 @@ public class AnomalyRoom : MonoBehaviour
         {
             if (IsObjectInRoom(obj))
             {
-                // Print the name of the post-anomaly object in the room
                 Debug.Log("Post-Anomaly in " + gameObject.name + ": " + obj.name);
+                obj.SetActive(false); // turn it off, we have to leave it on in editor so it can be detected
             }
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private bool IsObjectInRoom(GameObject obj)
     {
-        // Check if the object is within the bounds of the room
         Collider roomCollider = GetComponent<Collider>();
         if (roomCollider != null)
         {
@@ -53,5 +45,9 @@ public class AnomalyRoom : MonoBehaviour
             Debug.LogWarning("No collider found on the room GameObject: " + gameObject.name);
             return false;
         }
+    }
+    void Update()
+    {
+
     }
 }
