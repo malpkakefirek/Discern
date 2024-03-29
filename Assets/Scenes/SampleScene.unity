@@ -1857,8 +1857,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fc8c828a51a6649bb7c7b7ef249846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  is_extra_object: 0
-  is_scp: 1
+  is_extra_object: 1
+  is_scp: 0
   is_light_anomaly: 0
   can_be_resized: 0
   resized_scale_x: 1

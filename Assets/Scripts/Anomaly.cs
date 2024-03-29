@@ -224,10 +224,10 @@ public class Anomaly : MonoBehaviour
                     break;
 
                 default:
-                    Debug.LogError("Anomaly fix function not implemented for: " + currentAnomaly + " in " + roomName);
+                    Debug.LogError("Anomaly fix `" + currentAnomaly + "` function not implemented for: " + gameObject.name + " in " + roomName);
                     break;
             }
-            Debug.Log("Fixed Anomaly `"+currentAnomaly+ "` for: " + currentAnomaly + " in " + roomName);
+            Debug.Log("Fixed Anomaly `"+currentAnomaly+ "` for: " + gameObject.name + " in " + roomName);
             currentAnomaly = null;
         }
         else

@@ -6,6 +6,7 @@ public class AnomalyRoom : MonoBehaviour
 {
     private string preAnomalyTag = "AnomalyObjectPre";
     public GameObject[] anomalyObjects;
+    private Anomaly activeAnomaly;
 
     [SerializeField] GameObject player;
     // Start is called before the first frame update
@@ -58,10 +59,11 @@ public class AnomalyRoom : MonoBehaviour
     {
         if (anomalyObjects.Length > 0)
         {
+            if (activeAnomaly != null)
+                activeAnomaly.fixAnomaly();// place holder, we fix and then spawn new one.
             int randomIndex = Random.Range(0, anomalyObjects.Length);
-            Anomaly selectedObject = anomalyObjects[randomIndex].GetComponent<Anomaly>();
-            selectedObject.fixAnomaly(); // place holder, we fix and then spawn new one.
-            selectedObject.spawnAnomaly();
+            activeAnomaly = anomalyObjects[randomIndex].GetComponent<Anomaly>();
+            activeAnomaly.spawnAnomaly();
         }
         else
         {
