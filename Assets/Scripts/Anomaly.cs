@@ -278,6 +278,16 @@ public class Anomaly : MonoBehaviour
     {
         // to be implemented
     }
+
+
+
+
+
+    // Getters
+    public string getCurrentAnomalyName()
+    {
+        return currentAnomaly;
+    }
 }
 
 [CustomEditor(typeof(Anomaly))]

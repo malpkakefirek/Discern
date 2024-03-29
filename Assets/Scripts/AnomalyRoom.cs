@@ -70,4 +70,9 @@ public class AnomalyRoom : MonoBehaviour
             Debug.LogWarning("No Anomalies in the "+gameObject.name+" are present!");
         }
     }
+
+    public Anomaly getActiveAnomaly()
+    {
+        return activeAnomaly;
+    }
 }
