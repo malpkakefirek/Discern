@@ -30,6 +30,7 @@ public class Anomaly : MonoBehaviour
     public Texture2D image_to_change;
 
     private string roomName;
+    private string currentAnomaly;
 
     // Hold a list of all anomalies that are possible
     private List<string> activeAnomalies = new List<string>();
@@ -89,9 +90,9 @@ public class Anomaly : MonoBehaviour
         if (activeAnomalies.Count > 0)
         {
             int randomIndex = Random.Range(0, activeAnomalies.Count);
-            string selectedAnomaly = activeAnomalies[randomIndex];
+            currentAnomaly = activeAnomalies[randomIndex];
             // Spawning logic here
-            switch (selectedAnomaly)
+            switch (currentAnomaly)
             {
                 case "Extra Object Anomaly":
                     SpawnExtraObjectAnomaly();
@@ -126,19 +127,19 @@ public class Anomaly : MonoBehaviour
                     break;
 
                 default:
-                    Debug.LogError("Anomaly function not implemented for: " + selectedAnomaly + " in " + roomName);
+                    Debug.LogError("Anomaly function not implemented for: " + currentAnomaly + " in " + roomName);
                     break;
             }
             //
-            Debug.Log("Spawned an anomaly `" + selectedAnomaly + "` for " + gameObject.name + " in " + roomName);
+            Debug.Log("Spawned an anomaly `" + currentAnomaly + "` for " + gameObject.name + " in " + roomName);
         }
         else
         {
             Debug.LogError("No anomalies assigned to " + gameObject.name + " in " + roomName);
         }
     }
-
-
+    
+    // SPAWING OF ANOMALIES !
     private void SpawnExtraObjectAnomaly()
     {
         gameObject.SetActive(true);
@@ -177,6 +178,103 @@ public class Anomaly : MonoBehaviour
         model_to_change.SetActive(true);
     }
     private void SpawnPaintingAnomaly()
+    {
+        // to be implemented
+    }
+
+
+
+    // Fixing Anomalies Logic
+    public void fixAnomaly()
+    {
+        if ( currentAnomaly != null)
+        {
+            switch (currentAnomaly)
+            {
+                case "Extra Object Anomaly":
+                    FixExtraObjectAnomaly();
+                    break;
+
+                case "SCP Anomaly":
+                    FixSCPAnomaly();
+                    break;
+
+                case "Light Anomaly":
+                    FixLightAnomaly();
+                    break;
+
+                case "Resizable Anomaly":
+                    FixResizableAnomaly();
+                    break;
+
+                case "Disappearing Anomaly":
+                    FixDisappearingAnomaly();
+                    break;
+
+                case "Moving Anomaly":
+                    FixMovingAnomaly();
+                    break;
+
+                case "Model Changing Anomaly":
+                    FixModelChangingAnomaly();
+                    break;
+
+                case "Painting Anomaly":
+                    FixPaintingAnomaly();
+                    break;
+
+                default:
+                    Debug.LogError("Anomaly fix function not implemented for: " + currentAnomaly + " in " + roomName);
+                    break;
+            }
+            Debug.Log("Fixed Anomaly `"+currentAnomaly+ "` for: " + currentAnomaly + " in " + roomName);
+            currentAnomaly = null;
+        }
+        else
+        {
+            Debug.LogWarning("Can't fix anomaly if it doesn't exist! Object: " + gameObject.name + " in " + roomName);
+        }
+    }
+
+    // FIXING ANOMALIES !!!
+    private void FixExtraObjectAnomaly()
+    {
+        gameObject.SetActive(false);
+    }
+    private void FixSCPAnomaly()
+    {
+        gameObject.SetActive(false);
+    }
+    private void FixLightAnomaly()
+    {
+        // fix light anomaly idk to be implemented
+    }
+    private void FixResizableAnomaly()
+    {
+        gameObject.transform.localScale = new Vector3(
+                gameObject.transform.localScale.x / resized_scale_x,
+                gameObject.transform.localScale.y / resized_scale_y,
+                gameObject.transform.localScale.z / resized_scale_z
+            );
+    }
+    private void FixDisappearingAnomaly()
+    {
+        gameObject.SetActive(true);
+    }
+    private void FixMovingAnomaly()
+    {
+        gameObject.transform.position = new Vector3(
+                gameObject.transform.position.x - moved_x,
+                gameObject.transform.position.y - moved_y,
+                gameObject.transform.position.z - moved_z
+            );
+    }
+    private void FixModelChangingAnomaly()
+    {
+        gameObject.SetActive(true);
+        model_to_change.SetActive(false);
+    }
+    private void FixPaintingAnomaly()
     {
         // to be implemented
     }

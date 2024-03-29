@@ -56,7 +56,8 @@ public class AnomalyRoom : MonoBehaviour
         if (anomalyObjects.Length > 0)
         {
             int randomIndex = Random.Range(0, anomalyObjects.Length);
-            Anomaly selectedObject = anomalyObjects[randomIndex].GetComponent<Anomaly>(); ;
+            Anomaly selectedObject = anomalyObjects[randomIndex].GetComponent<Anomaly>();
+            selectedObject.fixAnomaly(); // place holder, we fix and then spawn new one.
             selectedObject.spawnAnomaly();
         }
         else
