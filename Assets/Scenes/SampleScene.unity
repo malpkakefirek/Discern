@@ -900,7 +900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 120844, guid: 1f44ff26a40ad394081c1f8220d99413, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 120844, guid: 1f44ff26a40ad394081c1f8220d99413, type: 3}
       propertyPath: m_TagString
@@ -1112,7 +1112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_extra_object: 0
-  can_be_resized: 0
+  is_scp: 0
+  is_light_anomaly: 0
+  can_be_resized: 1
   resized_scale_x: 1
   resized_scale_y: 1
   resized_scale_z: 1
@@ -1121,8 +1123,10 @@ MonoBehaviour:
   moved_x: 0
   moved_y: 0
   moved_z: 0
-  can_change_models: 0
-  model_to_change: {fileID: 0}
+  can_change_models: 1
+  model_to_change: {fileID: 1856233246}
+  can_be_painting_anomaly: 0
+  image_to_change: {fileID: 0}
 --- !u!1001 &303102724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1137,7 +1141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 178230, guid: bfb5063a60f6ab946b7818053c46d9d2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 178230, guid: bfb5063a60f6ab946b7818053c46d9d2, type: 3}
       propertyPath: m_TagString
@@ -1212,7 +1216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 123982, guid: 0645959ee12a3f244bc08f72e9a4d0d0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 123982, guid: 0645959ee12a3f244bc08f72e9a4d0d0, type: 3}
       propertyPath: m_TagString
@@ -1432,7 +1436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 178230, guid: bfb5063a60f6ab946b7818053c46d9d2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 178230, guid: bfb5063a60f6ab946b7818053c46d9d2, type: 3}
       propertyPath: m_TagString
@@ -1566,7 +1570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 116358, guid: 5790c7c1e7865114f93ccdd869db3056, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 116358, guid: 5790c7c1e7865114f93ccdd869db3056, type: 3}
       propertyPath: m_TagString
@@ -1682,7 +1686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02c1f6b1a624b54b92049ec7c325a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anomalyPairs: []
+  anomalyObjects: []
 --- !u!4 &493625555
 Transform:
   m_ObjectHideFlags: 0
@@ -1825,7 +1829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 116358, guid: 5790c7c1e7865114f93ccdd869db3056, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 116358, guid: 5790c7c1e7865114f93ccdd869db3056, type: 3}
       propertyPath: m_TagString
@@ -2618,6 +2622,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_extra_object: 0
+  is_scp: 0
+  is_light_anomaly: 0
   can_be_resized: 0
   resized_scale_x: 1
   resized_scale_y: 1
@@ -2629,6 +2635,8 @@ MonoBehaviour:
   moved_z: 0
   can_change_models: 0
   model_to_change: {fileID: 0}
+  can_be_painting_anomaly: 0
+  image_to_change: {fileID: 0}
 --- !u!1001 &698389780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3641,6 +3649,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_extra_object: 0
+  is_scp: 0
+  is_light_anomaly: 0
   can_be_resized: 0
   resized_scale_x: 1
   resized_scale_y: 1
@@ -3652,6 +3662,8 @@ MonoBehaviour:
   moved_z: 0
   can_change_models: 0
   model_to_change: {fileID: 0}
+  can_be_painting_anomaly: 0
+  image_to_change: {fileID: 0}
 --- !u!1 &1072011352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3704,7 +3716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02c1f6b1a624b54b92049ec7c325a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anomalyPairs: []
+  anomalyObjects: []
 --- !u!114 &1072011355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3786,7 +3798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 120844, guid: 1f44ff26a40ad394081c1f8220d99413, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 120844, guid: 1f44ff26a40ad394081c1f8220d99413, type: 3}
       propertyPath: m_TagString
@@ -4068,7 +4080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 108414, guid: 8088cc0ca1f49f645802eeca8f4c1615, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 108414, guid: 8088cc0ca1f49f645802eeca8f4c1615, type: 3}
       propertyPath: m_TagString
@@ -4388,7 +4400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 123982, guid: 0645959ee12a3f244bc08f72e9a4d0d0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 123982, guid: 0645959ee12a3f244bc08f72e9a4d0d0, type: 3}
       propertyPath: m_TagString
@@ -4475,6 +4487,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_extra_object: 0
+  is_scp: 0
+  is_light_anomaly: 0
   can_be_resized: 0
   resized_scale_x: 1
   resized_scale_y: 1
@@ -4486,6 +4500,8 @@ MonoBehaviour:
   moved_z: 0
   can_change_models: 0
   model_to_change: {fileID: 0}
+  can_be_painting_anomaly: 0
+  image_to_change: {fileID: 0}
 --- !u!1001 &1312678653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5151,6 +5167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_extra_object: 0
+  is_scp: 1
+  is_light_anomaly: 0
   can_be_resized: 0
   resized_scale_x: 1
   resized_scale_y: 1
@@ -5162,6 +5180,8 @@ MonoBehaviour:
   moved_z: 0
   can_change_models: 0
   model_to_change: {fileID: 0}
+  can_be_painting_anomaly: 0
+  image_to_change: {fileID: 0}
 --- !u!1 &1497120355
 GameObject:
   m_ObjectHideFlags: 0
@@ -5293,6 +5313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_extra_object: 0
+  is_scp: 0
+  is_light_anomaly: 0
   can_be_resized: 0
   resized_scale_x: 1
   resized_scale_y: 1
@@ -5304,6 +5326,8 @@ MonoBehaviour:
   moved_z: 0
   can_change_models: 0
   model_to_change: {fileID: 0}
+  can_be_painting_anomaly: 0
+  image_to_change: {fileID: 0}
 --- !u!1001 &1575173855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5394,6 +5418,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_extra_object: 0
+  is_scp: 0
+  is_light_anomaly: 0
   can_be_resized: 0
   resized_scale_x: 1
   resized_scale_y: 1
@@ -5405,6 +5431,8 @@ MonoBehaviour:
   moved_z: 0
   can_change_models: 0
   model_to_change: {fileID: 0}
+  can_be_painting_anomaly: 0
+  image_to_change: {fileID: 0}
 --- !u!1001 &1630682652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5486,7 +5514,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fc8c828a51a6649bb7c7b7ef249846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  is_extra_object: 0
+  is_extra_object: 1
+  is_scp: 0
+  is_light_anomaly: 0
   can_be_resized: 0
   resized_scale_x: 1
   resized_scale_y: 1
@@ -5498,6 +5528,8 @@ MonoBehaviour:
   moved_z: 0
   can_change_models: 0
   model_to_change: {fileID: 0}
+  can_be_painting_anomaly: 0
+  image_to_change: {fileID: 0}
 --- !u!4 &1630840392 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 499608, guid: 8084703d30cc2204d910a3ffb54cf246, type: 3}
@@ -5764,17 +5796,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_extra_object: 0
+  is_scp: 0
+  is_light_anomaly: 0
   can_be_resized: 0
   resized_scale_x: 1
   resized_scale_y: 1
   resized_scale_z: 1
-  can_disappear: 0
-  can_be_moved: 0
-  moved_x: 0
+  can_disappear: 1
+  can_be_moved: 1
+  moved_x: -0.1
   moved_y: 0
-  moved_z: 0
-  can_change_models: 0
+  moved_z: 0.1
+  can_change_models: 1
   model_to_change: {fileID: 303289306}
+  can_be_painting_anomaly: 0
+  image_to_change: {fileID: 0}
 --- !u!1001 &1828930686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5896,6 +5932,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1296544407}
   m_SourcePrefab: {fileID: 100100000, guid: fad3894d33d323447a3187fbca3004cc, type: 3}
+--- !u!1 &1856233246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 108414, guid: 8088cc0ca1f49f645802eeca8f4c1615, type: 3}
+  m_PrefabInstance: {fileID: 2051939545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1864644546 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 421646, guid: c544f22775dffd641b35be9b929052d1, type: 3}
@@ -6062,6 +6103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_extra_object: 0
+  is_scp: 0
+  is_light_anomaly: 0
   can_be_resized: 0
   resized_scale_x: 1
   resized_scale_y: 1
@@ -6073,6 +6116,8 @@ MonoBehaviour:
   moved_z: 0
   can_change_models: 0
   model_to_change: {fileID: 0}
+  can_be_painting_anomaly: 0
+  image_to_change: {fileID: 0}
 --- !u!1001 &2001857716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6185,7 +6230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 108414, guid: 8088cc0ca1f49f645802eeca8f4c1615, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 108414, guid: 8088cc0ca1f49f645802eeca8f4c1615, type: 3}
       propertyPath: m_TagString

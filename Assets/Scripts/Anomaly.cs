@@ -29,14 +29,20 @@ public class Anomaly : MonoBehaviour
     public bool can_be_painting_anomaly = false;
     public Texture2D image_to_change;
 
+    private string roomName;
+
     // Hold a list of all anomalies that are possible
     private List<string> activeAnomalies = new List<string>();
 
     // Start is called before the first frame update
     void Start()
     {
-        if (is_extra_object)
+        roomName = transform.parent.parent.parent.parent.gameObject.name;
+
+        if (is_extra_object) {
             activeAnomalies.Add("Extra Object Anomaly");
+            gameObject.SetActive(false);
+        }
         else if (is_scp)
             activeAnomalies.Add("SCP Anomaly");
         else if (is_light_anomaly)
@@ -71,6 +77,103 @@ public class Anomaly : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    public void spawnAnomaly()
+    {
+        if (activeAnomalies.Count > 0)
+        {
+            int randomIndex = Random.Range(0, activeAnomalies.Count);
+            string selectedAnomaly = activeAnomalies[randomIndex];
+            // Spawning logic here
+            switch (selectedAnomaly)
+            {
+                case "Extra Object Anomaly":
+                    SpawnExtraObjectAnomaly();
+                    break;
+
+                case "SCP Anomaly":
+                    SpawnSCPAnomaly();
+                    break;
+
+                case "Light Anomaly":
+                    SpawnLightAnomaly();
+                    break;
+
+                case "Resizable Anomaly":
+                    SpawnResizableAnomaly();
+                    break;
+
+                case "Disappearing Anomaly":
+                    SpawnDisappearingAnomaly();
+                    break;
+
+                case "Moving Anomaly":
+                    SpawnMovingAnomaly();
+                    break;
+
+                case "Model Changing Anomaly":
+                    SpawnModelChangingAnomaly();
+                    break;
+
+                case "Painting Anomaly":
+                    SpawnPaintingAnomaly();
+                    break;
+
+                default:
+                    Debug.LogError("Anomaly function not implemented for: " + selectedAnomaly + " in " + roomName);
+                    break;
+            }
+            //
+            Debug.Log("Spawned an anomaly `" + selectedAnomaly + "` for " + gameObject.name + " in " + roomName);
+        }
+        else
+        {
+            Debug.LogError("No anomalies assigned to " + gameObject.name + " in " + roomName);
+        }
+    }
+
+
+    private void SpawnExtraObjectAnomaly()
+    {
+        gameObject.SetActive(true);
+    }
+    private void SpawnSCPAnomaly()
+    {
+        gameObject.SetActive(true);
+    }
+    private void SpawnLightAnomaly()
+    {
+        // do some light anomaly idk to be implemented
+    }
+    private void SpawnResizableAnomaly()
+    {
+        gameObject.transform.localScale = new Vector3(
+                gameObject.transform.localScale.x * resized_scale_x,
+                gameObject.transform.localScale.y * resized_scale_y,
+                gameObject.transform.localScale.z * resized_scale_z
+            );
+    }
+    private void SpawnDisappearingAnomaly()
+    {
+        gameObject.SetActive(false);
+    }
+    private void SpawnMovingAnomaly()
+    {
+        gameObject.transform.localPosition = new Vector3(
+                gameObject.transform.localPosition.x + moved_x,
+                gameObject.transform.localPosition.y * moved_y,
+                gameObject.transform.localPosition.z * moved_z
+            );
+    }
+    private void SpawnModelChangingAnomaly()
+    {
+        gameObject.SetActive(false);
+        model_to_change.SetActive(true);
+    }
+    private void SpawnPaintingAnomaly()
+    {
+        // to be implemented
     }
 }
 
