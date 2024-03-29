@@ -3125,6 +3125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anomalyObjects: []
+  player: {fileID: 957538813}
 --- !u!4 &942077123
 Transform:
   m_ObjectHideFlags: 0
@@ -3236,6 +3237,11 @@ Transform:
   - {fileID: 1811726114}
   m_Father: {fileID: 942077123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &957538813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+  m_PrefabInstance: {fileID: 910120033}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &961529149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3684,6 +3690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anomalyObjects: []
+  player: {fileID: 957538813}
 --- !u!114 &1072011355
 MonoBehaviour:
   m_ObjectHideFlags: 0

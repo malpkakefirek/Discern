@@ -6,6 +6,8 @@ public class AnomalyRoom : MonoBehaviour
 {
     private string preAnomalyTag = "AnomalyObjectPre";
     public GameObject[] anomalyObjects;
+
+    [SerializeField] GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +49,8 @@ public class AnomalyRoom : MonoBehaviour
     {
         if (Time.time >= timeToUpdate)
         {
-            DoTestThingy();
+            if(!IsObjectInRoom(player))
+                DoTestThingy();
             timeToUpdate += updateTimeIncrement;
         }
     }
