@@ -39,15 +39,20 @@ public class Anomaly : MonoBehaviour
     {
         roomName = transform.parent.parent.parent.parent.gameObject.name;
 
-        if (is_extra_object) {
+        if (is_extra_object)
+        {
             activeAnomalies.Add("Extra Object Anomaly");
             gameObject.SetActive(false);
         }
         else if (is_scp)
+        {
             activeAnomalies.Add("SCP Anomaly");
+            gameObject.SetActive(false);
+        }
         else if (is_light_anomaly)
             activeAnomalies.Add("Light Anomaly");
-        else { 
+        else
+        {
             if (can_be_resized)
                 activeAnomalies.Add("Resizable Anomaly");
             if (can_disappear)
@@ -160,10 +165,10 @@ public class Anomaly : MonoBehaviour
     }
     private void SpawnMovingAnomaly()
     {
-        gameObject.transform.localPosition = new Vector3(
-                gameObject.transform.localPosition.x + moved_x,
-                gameObject.transform.localPosition.y * moved_y,
-                gameObject.transform.localPosition.z * moved_z
+        gameObject.transform.position = new Vector3(
+                gameObject.transform.position.x + moved_x,
+                gameObject.transform.position.y + moved_y,
+                gameObject.transform.position.z + moved_z
             );
     }
     private void SpawnModelChangingAnomaly()

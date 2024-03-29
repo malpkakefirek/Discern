@@ -22,7 +22,8 @@ public class AnomalyRoom : MonoBehaviour
                 count++;
             }
         }
-        System.Array.Resize(ref anomalyObjects, count);
+        if(count > 0 && count != preObjects.Length)
+            System.Array.Resize(ref anomalyObjects, count);
         Debug.Log("Objects in " + gameObject.name + " : "+ anomalyObjects.Length);
     }
 
@@ -52,8 +53,15 @@ public class AnomalyRoom : MonoBehaviour
     }
     private void DoTestThingy()
     {
-        int randomIndex = Random.Range(0, anomalyObjects.Length);
-        Anomaly selectedObject = anomalyObjects[randomIndex].GetComponent<Anomaly>(); ;
-        selectedObject.spawnAnomaly();
+        if (anomalyObjects.Length > 0)
+        {
+            int randomIndex = Random.Range(0, anomalyObjects.Length);
+            Anomaly selectedObject = anomalyObjects[randomIndex].GetComponent<Anomaly>(); ;
+            selectedObject.spawnAnomaly();
+        }
+        else
+        {
+            Debug.LogWarning("No Anomalies in the "+gameObject.name+" are present!");
+        }
     }
 }
