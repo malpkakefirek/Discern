@@ -32,23 +32,32 @@ public class Anomaly : MonoBehaviour
     private string roomName;
     private string currentAnomaly;
 
-    // Hold a list of all anomalies that are possible
+    // This is to turn object invisible, without setActive(false), because that breakes the scripts
+    private Renderer objectRenderer;
+    private Collider objectCollider;
+
     private List<string> activeAnomalies = new List<string>();
 
     // Start is called before the first frame update
     void Start()
     {
         roomName = transform.parent.parent.parent.parent.gameObject.name;
+        objectRenderer = GetComponent<Renderer>();
+        objectCollider = GetComponent<Collider>();
 
         if (is_extra_object)
         {
             activeAnomalies.Add("Extra Object Anomaly");
-            gameObject.SetActive(false);
+            objectRenderer.enabled = false;
+            objectCollider.enabled = false;
+            //gameObject.SetActive(false);
         }
         else if (is_scp)
         {
             activeAnomalies.Add("SCP Anomaly");
-            gameObject.SetActive(false);
+            objectRenderer.enabled = false;
+            objectCollider.enabled = false;
+            //gameObject.SetActive(false);
         }
         else if (is_light_anomaly)
             activeAnomalies.Add("Light Anomaly");
@@ -71,7 +80,7 @@ public class Anomaly : MonoBehaviour
         {
             int randomIndex = Random.Range(0, activeAnomalies.Count);
             string selectedAnomaly = activeAnomalies[randomIndex];
-            Debug.Log("Selected Anomaly for "+gameObject.name+" : " + selectedAnomaly);
+            //Debug.Log("Selected Anomaly for "+gameObject.name+" : " + selectedAnomaly);
         }
         else
         {
@@ -142,11 +151,15 @@ public class Anomaly : MonoBehaviour
     // SPAWING OF ANOMALIES !
     private void SpawnExtraObjectAnomaly()
     {
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
+        objectRenderer.enabled = true;
+        objectCollider.enabled = true;
     }
     private void SpawnSCPAnomaly()
     {
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
+        objectRenderer.enabled = true;
+        objectCollider.enabled = true;
     }
     private void SpawnLightAnomaly()
     {
@@ -162,7 +175,9 @@ public class Anomaly : MonoBehaviour
     }
     private void SpawnDisappearingAnomaly()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        objectRenderer.enabled = false;
+        objectCollider.enabled = false;
     }
     private void SpawnMovingAnomaly()
     {
@@ -175,6 +190,8 @@ public class Anomaly : MonoBehaviour
     private void SpawnModelChangingAnomaly()
     {
         gameObject.SetActive(false);
+        objectRenderer.enabled = false;
+        objectCollider.enabled = false;
         model_to_change.SetActive(true);
     }
     private void SpawnPaintingAnomaly()
@@ -239,11 +256,15 @@ public class Anomaly : MonoBehaviour
     // FIXING ANOMALIES !!!
     private void FixExtraObjectAnomaly()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        objectRenderer.enabled = false;
+        objectCollider.enabled = false;
     }
     private void FixSCPAnomaly()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        objectRenderer.enabled = false;
+        objectCollider.enabled = false;
     }
     private void FixLightAnomaly()
     {
@@ -259,7 +280,9 @@ public class Anomaly : MonoBehaviour
     }
     private void FixDisappearingAnomaly()
     {
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
+        objectRenderer.enabled = true;
+        objectCollider.enabled = true;
     }
     private void FixMovingAnomaly()
     {
@@ -271,7 +294,9 @@ public class Anomaly : MonoBehaviour
     }
     private void FixModelChangingAnomaly()
     {
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
+        objectRenderer.enabled = true;
+        objectCollider.enabled = true;
         model_to_change.SetActive(false);
     }
     private void FixPaintingAnomaly()

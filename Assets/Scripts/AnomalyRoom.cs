@@ -16,14 +16,14 @@ public class AnomalyRoom : MonoBehaviour
 
         GameObject[] preObjects = GameObject.FindGameObjectsWithTag(preAnomalyTag);
         anomalyObjects = new GameObject[preObjects.Length];
-        Debug.LogWarning("1Test " + preObjects.Length);
-        Debug.LogWarning("2Test " + anomalyObjects.Length);
+        //Debug.LogWarning("1Test " + preObjects.Length);
+        //Debug.LogWarning("2Test " + anomalyObjects.Length);
         int count = 0;
         foreach (GameObject preObj in preObjects)
         {
             if (IsObjectInRoom(preObj))
             {
-                Debug.LogWarning("3Test " + preObj.name);
+                //Debug.LogWarning("3Test " + preObj.name);
                 anomalyObjects[count] = preObj;
                 count++;
             }
