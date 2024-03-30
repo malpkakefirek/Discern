@@ -12,6 +12,7 @@ public class F1Menu : MonoBehaviour
     [SerializeField] TextMeshProUGUI menuText;
     [SerializeField] GameObject panel;
     [SerializeField] GameObject player;
+    [SerializeField] GameObject gameController;
     private CharacterController playerController;
     // Start is called before the first frame update
     void Start()
@@ -106,6 +107,7 @@ public class F1Menu : MonoBehaviour
                             if (room != null)
                             {
                                 //room.GetComponent<AnomalyRoom>().getActiveAnomaly().fixAnomaly();
+                                gameController.GetComponent<GameController>().attempAnomalyFix(room,"test");
                                 closeMenu();
                             }
                         }
