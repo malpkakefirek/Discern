@@ -71,4 +71,14 @@ public class GameController : MonoBehaviour
         // to be implemented
         Debug.Log("Anomalies found : " + foundAnomalies + "/" + totalAnomalies);
     }
+
+    public void attempAnomalyFix(GameObject room, string name)
+    {
+        Debug.Log("Attempted anomaly fix in: " + room.name +" | type: "+ name);
+        if (room.GetComponent<AnomalyRoom>().fixAnomaly(name))
+        {
+            totalAnomalies--;
+            availableRooms.Add(room);
+        }
+    }
 }
