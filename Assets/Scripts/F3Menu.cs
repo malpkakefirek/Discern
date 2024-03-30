@@ -14,7 +14,7 @@ public class F3Menu : MonoBehaviour
     {
         rooms = GameObject.FindGameObjectsWithTag("AnomalyRoom");
         menuText.text = "";
-        InvokeRepeating("RefreshFunction", 0f, 1f);
+        InvokeRepeating("RefreshFunction", 0f, 1f); //refresh every 1 sec
     }
 
     // Update is called once per frame

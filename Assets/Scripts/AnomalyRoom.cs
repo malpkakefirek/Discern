@@ -57,6 +57,16 @@ public class AnomalyRoom : MonoBehaviour
     }
     private void DoTestThingy()
     {
+        spawnRandomAnomaly();
+    }
+
+    public Anomaly getActiveAnomaly()
+    {
+        return activeAnomaly;
+    }
+
+    public void spawnRandomAnomaly()
+    {
         if (anomalyObjects.Length > 0)
         {
             if (activeAnomaly != null)
@@ -67,12 +77,7 @@ public class AnomalyRoom : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No Anomalies in the "+gameObject.name+" are present!");
+            Debug.LogWarning("No Anomalies in the " + gameObject.name + " are present!");
         }
-    }
-
-    public Anomaly getActiveAnomaly()
-    {
-        return activeAnomaly;
     }
 }
