@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AnomalyRoom : MonoBehaviour
 {
     private string preAnomalyTag = "AnomalyObjectPre";
-    public GameObject[] anomalyObjects;
-    private Anomaly activeAnomaly;
+    private GameObject[] anomalyObjects;
+    public Dictionary<Transform, List<Transform>> anomalies;
+    public Transform activeAnomaly = null;
 
     [SerializeField] GameObject player;
     // Start is called before the first frame update
@@ -20,7 +22,24 @@ public class AnomalyRoom : MonoBehaviour
             }
         }
         anomalyObjects = roomObjects.ToArray();
-        Debug.Log("Objects in " + gameObject.name + " : "+ anomalyObjects.Length);
+        anomalies = new Dictionary<Transform, List<Transform>>();
+        Transform postFolder = anomalyObjects[0].transform.parent.parent.GetChild(1);
+        foreach (GameObject anomaly in anomalyObjects)
+        {
+            foreach (Transform anomalyPostFolder in postFolder.GetComponentsInChildren<Transform>())
+            {
+                if (anomalyPostFolder.name == anomaly.name)
+                {
+                    anomalies[anomaly.transform] = new (anomalyPostFolder.GetComponentsInChildren<Transform>());
+                    anomalies[anomaly.transform].Remove(anomaly.transform); // GetComponentsInChildren also adds itself, so we need to remove it
+                    foreach (Transform anomalyPost in anomalies[anomaly.transform])
+                    {
+                        anomalyPost.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+        Debug.Log("Objects in " + gameObject.name + " : "+ anomalies.Count);
     }
 
     private bool IsObjectInRoom(GameObject obj)
@@ -61,20 +80,18 @@ public class AnomalyRoom : MonoBehaviour
         spawnRandomAnomaly();
     }
 
-    public Anomaly getActiveAnomaly()
-    {
-        return activeAnomaly;
-    }
+
 
     public void spawnRandomAnomaly()
     {
-        if (anomalyObjects.Length > 0)
+        if (anomalies.Count > 0)
         {
-            if (activeAnomaly != null)
-                activeAnomaly.fixAnomaly();// place holder, we fix and then spawn new one.
-            int randomIndex = Random.Range(0, anomalyObjects.Length);
-            activeAnomaly = anomalyObjects[randomIndex].GetComponent<Anomaly>();
-            activeAnomaly.spawnAnomaly();
+            (Transform randomAnomalyPre, List<Transform> anomalyPost) = anomalies.ElementAt(Random.Range(0, anomalies.Count));
+            Transform randomAnomalyPost = anomalyPost[Random.Range(0, anomalyPost.Count)];
+            activeAnomaly = randomAnomalyPre;
+            randomAnomalyPre.gameObject.SetActive(false);
+            randomAnomalyPost.gameObject.SetActive(true);
+            Debug.Log("Summoned anomaly " + randomAnomalyPost.name + " on " + randomAnomalyPre.name + " in room " + name);
         }
         else
         {
