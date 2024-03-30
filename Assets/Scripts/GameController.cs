@@ -5,7 +5,7 @@ using System.Linq;
 
 public class GameController : MonoBehaviour
 {
-    private GameObject[] rooms;
+    private int roomsCount;
 
 
     [SerializeField] int anomalySpawnTimeMin = 15;
@@ -21,8 +21,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rooms = GameObject.FindGameObjectsWithTag("AnomalyRoom");
-        availableRooms = rooms.ToList();
+        availableRooms = GameObject.FindGameObjectsWithTag("AnomalyRoom").ToList();
+        roomsCount = availableRooms.Count;
     }
 
     // Update is called once per frame
@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
 
     private void spawnAnomaly()
     {
-        if (availableRooms.Count != 0)
+        if (availableRooms.Count > 0)
         {
             int randomIndex = Random.Range(0, availableRooms.Count);
             GameObject room = availableRooms[randomIndex];
@@ -57,7 +57,7 @@ public class GameController : MonoBehaviour
                 availableRooms.Remove(room);
                 totalAnomalies++;
 
-                float ratio = (float)availableRooms.Count / rooms.Length;
+                float ratio = (float)totalAnomalies / roomsCount;
                 if (ratio > failCondition)
                 {
                     Debug.LogError("Player died after new anomaly spawned");
