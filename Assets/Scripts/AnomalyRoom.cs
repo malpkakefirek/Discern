@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,24 +11,15 @@ public class AnomalyRoom : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log("Objects in " + gameObject.name + ":");
-
-        GameObject[] preObjects = GameObject.FindGameObjectsWithTag(preAnomalyTag);
-        anomalyObjects = new GameObject[preObjects.Length];
-        //Debug.LogWarning("1Test " + preObjects.Length);
-        //Debug.LogWarning("2Test " + anomalyObjects.Length);
-        int count = 0;
-        foreach (GameObject preObj in preObjects)
+        List<GameObject> roomObjects = new();
+        foreach (Transform roomTransforms in transform.GetComponentsInChildren<Transform>())
         {
-            if (IsObjectInRoom(preObj))
+            if (roomTransforms.gameObject.tag.Contains(preAnomalyTag))
             {
-                //Debug.LogWarning("3Test " + preObj.name);
-                anomalyObjects[count] = preObj;
-                count++;
+                roomObjects.Add(roomTransforms.gameObject);
             }
         }
-        if(count > 0 && count != preObjects.Length)
-            System.Array.Resize(ref anomalyObjects, count);
+        anomalyObjects = roomObjects.ToArray();
         Debug.Log("Objects in " + gameObject.name + " : "+ anomalyObjects.Length);
     }
 
