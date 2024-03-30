@@ -38,7 +38,7 @@ public class F3Menu : MonoBehaviour
     {
         foreach (GameObject room in rooms)
         {
-            menuText.text += room.name+"  |  object: "+ room.GetComponent<AnomalyRoom>().getActiveAnomaly().name + "  |  anomaly: " + room.GetComponent<AnomalyRoom>().getActiveAnomaly().getCurrentAnomalyName()+"\n";
+            //menuText.text += room.name+"  |  object: "+ room.GetComponent<AnomalyRoom>().activeAnomaly.gameObject.name + "  |  anomaly: " + room.GetComponent<AnomalyRoom>().activeAnomaly.gameObject.get+ "\n";
         }
         
     }

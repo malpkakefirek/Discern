@@ -30,10 +30,11 @@ public class AnomalyRoom : MonoBehaviour
             {
                 if (anomalyPostFolder.name == anomaly.name)
                 {
-                    anomalies[anomaly.transform] = new (anomalyPostFolder.GetComponentsInChildren<Transform>());
-                    anomalies[anomaly.transform].Remove(anomaly.transform); // GetComponentsInChildren also adds itself, so we need to remove it
+                    anomalies[anomaly.transform] = new (anomalyPostFolder.GetComponentsInChildren<Transform>(true));
+                    anomalies[anomaly.transform].Remove(anomalyPostFolder); // GetComponentsInChildren also adds itself, so we need to remove it
                     foreach (Transform anomalyPost in anomalies[anomaly.transform])
                     {
+                        Debug.Log(anomalyPost.gameObject.name);
                         anomalyPost.gameObject.SetActive(false);
                     }
                 }

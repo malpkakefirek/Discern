@@ -105,7 +105,7 @@ public class F1Menu : MonoBehaviour
                             GameObject room = rooms[i-1];
                             if (room != null)
                             {
-                                room.GetComponent<AnomalyRoom>().getActiveAnomaly().fixAnomaly();
+                                //room.GetComponent<AnomalyRoom>().getActiveAnomaly().fixAnomaly();
                                 closeMenu();
                             }
                         }
