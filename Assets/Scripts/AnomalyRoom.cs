@@ -91,4 +91,26 @@ public class AnomalyRoom : MonoBehaviour
             return false;
         }
     }
+
+    public bool fixAnomaly(string anomalyName)
+    {
+        if (anomalies.Count == 0)
+        {
+            Debug.LogWarning("No Anomalies in the " + gameObject.name + " are present!");
+            return false;  
+        }
+
+        if (!activeAnomaly || anomalyName != activeAnomaly.name)
+        {
+            return false;
+        }
+
+        activeAnomaly = null;
+        activeAnomaly.gameObject.SetActive(true);
+        foreach (Transform activeAnomaliesPost in anomalies[activeAnomaly])
+        { 
+            activeAnomaliesPost.gameObject.SetActive(false);
+        }
+        return true;
+    }
 }
