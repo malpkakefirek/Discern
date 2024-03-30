@@ -88,7 +88,15 @@ public class F1Menu : MonoBehaviour
                             GameObject room = rooms[i - 1];
                             if (room != null)
                             {
-                                room.GetComponent<AnomalyRoom>().spawnRandomAnomaly();
+                                if (!room.GetComponent<AnomalyRoom>().activeAnomaly)
+                                {
+                                    room.GetComponent<AnomalyRoom>().spawnRandomAnomaly();
+                                }
+                                else
+                                {
+                                    Debug.Log("Anomaly in this room already exists");
+                                }
+                                    
                                 closeMenu();
                             }
                         }
