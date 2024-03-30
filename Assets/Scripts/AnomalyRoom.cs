@@ -16,11 +16,14 @@ public class AnomalyRoom : MonoBehaviour
 
         GameObject[] preObjects = GameObject.FindGameObjectsWithTag(preAnomalyTag);
         anomalyObjects = new GameObject[preObjects.Length];
+        Debug.LogWarning("1Test " + preObjects.Length);
+        Debug.LogWarning("2Test " + anomalyObjects.Length);
         int count = 0;
         foreach (GameObject preObj in preObjects)
         {
             if (IsObjectInRoom(preObj))
             {
+                Debug.LogWarning("3Test " + preObj.name);
                 anomalyObjects[count] = preObj;
                 count++;
             }
@@ -32,10 +35,18 @@ public class AnomalyRoom : MonoBehaviour
 
     private bool IsObjectInRoom(GameObject obj)
     {
-        Collider roomCollider = GetComponent<Collider>();
-        if (roomCollider != null)
+        //Collider roomCollider = GetComponent<Collider>();
+        Collider[] allColliders = gameObject.GetComponents<Collider>();
+        if (allColliders != null)
         {
-            return roomCollider.bounds.Contains(obj.transform.position);
+            foreach (Collider collider in allColliders)
+            {
+                if (collider.bounds.Contains(obj.transform.position))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         else
         {
