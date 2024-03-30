@@ -18,10 +18,12 @@ public class GameController : MonoBehaviour
     private int totalAnomalies = 0;
     private int foundAnomalies = 0;
     private bool phoneOpened = false;
+    private List<GameObject> availableRooms;
     // Start is called before the first frame update
     void Start()
     {
         rooms = GameObject.FindGameObjectsWithTag("AnomalyRoom");
+        availableRooms = rooms.ToList();
     }
 
     // Update is called once per frame
@@ -46,8 +48,6 @@ public class GameController : MonoBehaviour
 
     private void spawnAnomaly()
     {
-        List<GameObject> availableRooms = rooms.Except(roomsWithAnomalies).ToList();
-
         if (availableRooms.Count != 0)
         {
             int randomIndex = Random.Range(0, availableRooms.Count);
@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
             Debug.Log("Tried spawning anomaly in: " + room.name);
             if (room.GetComponent<AnomalyRoom>().spawnRandomAnomaly())
             {
-                roomsWithAnomalies.Add(room);
+                roomsWithAnomalies.Remove(room);
                 totalAnomalies++;
 
                 float ratio = (float)roomsWithAnomalies.Count / rooms.Length;
