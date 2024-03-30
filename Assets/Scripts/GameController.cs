@@ -30,7 +30,6 @@ public class GameController : MonoBehaviour
         if (Time.time > timeToNextAnomaly)
         {
             spawnAnomaly();
-            totalAnomalies++;
             timeToNextAnomaly += Random.Range(anomalySpawnTimeMin, anomalySpawnTimeMax);
         }
 
@@ -54,14 +53,16 @@ public class GameController : MonoBehaviour
             int randomIndex = Random.Range(0, availableRooms.Count);
             GameObject room = availableRooms[randomIndex];
             Debug.Log("Tried spawning anomaly in: " + room.name);
-            //room.GetComponent<AnomalyRoom>.spawnAnomaly();
-            roomsWithAnomalies.Add(room);
-
-
-            float ratio = (float)roomsWithAnomalies.Count / rooms.Length;
-            if (ratio > failCondition)
+            if (room.GetComponent<AnomalyRoom>().spawnRandomAnomaly())
             {
-                Debug.LogError("Player died after new anomaly spawned");
+                roomsWithAnomalies.Add(room);
+                totalAnomalies++;
+
+                float ratio = (float)roomsWithAnomalies.Count / rooms.Length;
+                if (ratio > failCondition)
+                {
+                    Debug.LogError("Player died after new anomaly spawned");
+                }
             }
         }
 

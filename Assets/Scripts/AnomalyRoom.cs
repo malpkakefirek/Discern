@@ -9,6 +9,10 @@ public class AnomalyRoom : MonoBehaviour
     public Dictionary<Transform, List<Transform>> anomalies;
     public Transform activeAnomaly = null;
 
+    public float spawnPointX;
+    public float spawnPointY;
+    public float spawnPointZ;
+
     [SerializeField] GameObject player;
     // Start is called before the first frame update
     void Start()
@@ -65,25 +69,11 @@ public class AnomalyRoom : MonoBehaviour
         }
     }
 
-    private float timeToUpdate = 0f;
-    private float updateTimeIncrement = 10f;
     void Update()
     {
-        if (Time.time >= timeToUpdate)
-        {
-            if(!IsObjectInRoom(player))
-                DoTestThingy();
-            timeToUpdate += updateTimeIncrement;
-        }
-    }
-    private void DoTestThingy()
-    {
-        spawnRandomAnomaly();
     }
 
-
-
-    public void spawnRandomAnomaly()
+    public bool spawnRandomAnomaly()
     {
         if (anomalies.Count > 0)
         {
@@ -93,10 +83,12 @@ public class AnomalyRoom : MonoBehaviour
             randomAnomalyPre.gameObject.SetActive(false);
             randomAnomalyPost.gameObject.SetActive(true);
             Debug.Log("Summoned anomaly " + randomAnomalyPost.name + " on " + randomAnomalyPre.name + " in room " + name);
+            return true;
         }
         else
         {
             Debug.LogWarning("No Anomalies in the " + gameObject.name + " are present!");
+            return false;
         }
     }
 }

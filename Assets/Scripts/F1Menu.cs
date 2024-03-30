@@ -133,7 +133,7 @@ public class F1Menu : MonoBehaviour
                                 if (room != null)
                                 {
                                     playerController.enabled = false; // Temporarily disable the CharacterController to teleport
-                                    player.transform.position = room.GetComponent<Collider>().bounds.center;
+                                    player.transform.position = new Vector3(room.GetComponent<AnomalyRoom>().spawnPointX, room.GetComponent<AnomalyRoom>().spawnPointY, room.GetComponent<AnomalyRoom>().spawnPointZ);
                                     playerController.enabled = true;
                                     closeMenu();
                                 }

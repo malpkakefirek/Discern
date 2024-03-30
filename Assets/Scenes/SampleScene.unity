@@ -1664,6 +1664,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 34.663, y: -27.594, z: -13.136}
+--- !u!1 &497526778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 497526780}
+  - component: {fileID: 497526779}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &497526779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497526778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 014b6d750fec494458243fb8ce82d3a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anomalySpawnTimeMin: 15
+  anomalySpawnTimeMax: 45
+  failCondition: 0.5
+--- !u!4 &497526780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497526778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &516753589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3392,6 +3439,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
+  spawnPointX: -10.2
+  spawnPointY: 2
+  spawnPointZ: -25
   player: {fileID: 957538813}
 --- !u!4 &942077123
 Transform:
@@ -3978,6 +4028,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
+  spawnPointX: 0
+  spawnPointY: 2
+  spawnPointZ: -25
   player: {fileID: 957538813}
 --- !u!114 &1072011355
 MonoBehaviour:
@@ -6908,6 +6961,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 963194228}
   - {fileID: 705507995}
+  - {fileID: 497526780}
   - {fileID: 496589877}
   - {fileID: 1365844693}
   - {fileID: 970228826}
