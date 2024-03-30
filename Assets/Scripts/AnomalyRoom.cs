@@ -38,7 +38,6 @@ public class AnomalyRoom : MonoBehaviour
                     anomalies[anomaly.transform].Remove(anomalyPostFolder); // GetComponentsInChildren also adds itself, so we need to remove it
                     foreach (Transform anomalyPost in anomalies[anomaly.transform])
                     {
-                        Debug.Log(anomalyPost.gameObject.name);
                         anomalyPost.gameObject.SetActive(false);
                     }
                 }
@@ -100,17 +99,25 @@ public class AnomalyRoom : MonoBehaviour
             return false;  
         }
 
-        if (!activeAnomaly || anomalyName != activeAnomaly.name)
+        if (!activeAnomaly)
         {
+            Debug.Log("There were no anomalies active in the " + gameObject.name + "!");
+            return false;
+        }
+
+        if (anomalyName != activeAnomaly.name)
+        {
+            Debug.Log("The anomaly in the " + gameObject.name + " was incorrect!");
             return false;
         }
 
         activeAnomaly = null;
         activeAnomaly.gameObject.SetActive(true);
         foreach (Transform activeAnomaliesPost in anomalies[activeAnomaly])
-        { 
+        {
             activeAnomaliesPost.gameObject.SetActive(false);
         }
+        Debug.Log("The anomaly in the " + gameObject.name + " was correct!");
         return true;
     }
 }
