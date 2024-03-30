@@ -6,7 +6,6 @@ using System.Linq;
 public class GameController : MonoBehaviour
 {
     private GameObject[] rooms;
-    private List<GameObject> roomsWithAnomalies = new List<GameObject>();
 
 
     [SerializeField] int anomalySpawnTimeMin = 15;
@@ -55,10 +54,10 @@ public class GameController : MonoBehaviour
             Debug.Log("Tried spawning anomaly in: " + room.name);
             if (room.GetComponent<AnomalyRoom>().spawnRandomAnomaly())
             {
-                roomsWithAnomalies.Remove(room);
+                availableRooms.Remove(room);
                 totalAnomalies++;
 
-                float ratio = (float)roomsWithAnomalies.Count / rooms.Length;
+                float ratio = (float)availableRooms.Count / rooms.Length;
                 if (ratio > failCondition)
                 {
                     Debug.LogError("Player died after new anomaly spawned");
