@@ -27,6 +27,11 @@ public class AnomalyRoom : MonoBehaviour
         }
         anomalyObjects = roomObjects.ToArray();
         anomalies = new Dictionary<Transform, List<Transform>>();
+        if (anomalyObjects.Length <= 0)
+        {
+            Debug.LogWarning("No Anomaly Objects found in room: " + gameObject.name);
+            return;
+        }
         Transform postFolder = anomalyObjects[0].transform.parent.parent.GetChild(1);
         foreach (GameObject anomaly in anomalyObjects)
         {
