@@ -39,6 +39,12 @@ public class GuardController : MonoBehaviour
             playerDetected();
             Invoke("playerDetected", 1f);
             lastCalledTime = Time.time + 1f;
+
+            float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+            if (distanceToPlayer <= deathProximity)
+            {
+                Debug.LogError("Player was caught by the guard!");
+            }
         }
         else
         {
@@ -65,11 +71,6 @@ public class GuardController : MonoBehaviour
             }
         }
 
-        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-        if (distanceToPlayer <= deathProximity)
-        {
-            Debug.LogError("Player was caught by the guard!");
-        }
     }
 
     public void moveTo(Vector3 position)
