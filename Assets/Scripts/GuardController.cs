@@ -8,7 +8,10 @@ public class GuardController : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] Light light;
     [SerializeField] float detectionAngle = 90f;
+    [SerializeField] int maxRayDistance = 30;
     [SerializeField] private float raycastHeightPercentage = 0.9f;
+    [SerializeField] float idleTime = 10f;
+    [SerializeField] float deathProximity = 1.5f;
 
     private float guardHeight;
 
@@ -20,6 +23,7 @@ public class GuardController : MonoBehaviour
         light.spotAngle = detectionAngle;
     }
 
+    private float lastCalledTime;
     // Update is called once per frame
     void Update()
     {
@@ -34,10 +38,37 @@ public class GuardController : MonoBehaviour
         {
             playerDetected();
             Invoke("playerDetected", 1f);
+            lastCalledTime = Time.time + 1f;
         }
         else
         {
-            light.color = Color.green;
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    light.color = Color.green;
+                    if (Time.time - lastCalledTime >= idleTime)
+                    {
+                        lastCalledTime = Time.time;
+                        Vector3 randomPosition = GetRandomWalkablePosition();
+                        agent.SetDestination(randomPosition);
+                    }
+                }
+                else
+                {
+                    lastCalledTime = Time.time;
+                }
+            }
+            else
+            {
+                lastCalledTime = Time.time;
+            }
+        }
+
+        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        if (distanceToPlayer <= deathProximity)
+        {
+            Debug.LogError("Player was caught by the guard!");
         }
     }
 
@@ -65,8 +96,9 @@ public class GuardController : MonoBehaviour
         if (angleToPlayer < detectionAngle / 2f)
         {
             Vector3 raycastOrigin = transform.position + Vector3.up * guardHeight * raycastHeightPercentage;
+            int layer = 1 << LayerMask.NameToLayer("Default") | 1 << LayerMask.NameToLayer("Player");
             RaycastHit hit;
-            if (Physics.Raycast(raycastOrigin, directionToPlayer, out hit))
+            if (Physics.Raycast(raycastOrigin, directionToPlayer, out hit, maxRayDistance, layer, QueryTriggerInteraction.Ignore))
             {
                 if (hit.collider.gameObject == player)
                 {
@@ -75,6 +107,25 @@ public class GuardController : MonoBehaviour
             }
         }
         return false;
+    }
+    Vector3 GetRandomWalkablePosition()
+    {
+        NavMeshHit hit;
+        Vector3 randomPosition = Vector3.zero;
+
+        float minX = 8f;
+        float maxX = 90f;
+        float minZ = 6f;
+        float maxZ = 50f;
+
+        Vector3 randomPoint = new Vector3(Random.Range(minX, maxX), 0f, Random.Range(minZ, maxZ));
+
+        if (NavMesh.SamplePosition(randomPoint, out hit, 100f, NavMesh.AllAreas))
+        {
+            randomPosition = hit.position;
+        }
+
+        return randomPosition;
     }
 
     void playerDetected()
