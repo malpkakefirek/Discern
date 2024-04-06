@@ -61876,7 +61876,7 @@ Light:
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -66010,7 +66010,7 @@ Transform:
   m_GameObject: {fileID: 1516431893}
   serializedVersion: 2
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 72.5, y: 7, z: 42.5}
+  m_LocalPosition: {x: 72.5, y: 6.9, z: 42.5}
   m_LocalScale: {x: 14.5, y: 1, z: 8.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86228,8 +86228,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2073851294}
   light: {fileID: 1409772068}
-  detectionAngle: 140
+  detectionAngle: 170
+  maxRayDistance: 30
   raycastHeightPercentage: 0.37
+  idleTime: 10
+  deathProximity: 2.25
   agent: {fileID: 2006816141}
 --- !u!136 &2006816139
 CapsuleCollider:
