@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] GameObject pauseMenu;
     [SerializeField] MonoBehaviour fpsController;
+    [SerializeField] MonoBehaviour phoneScript;
     public bool paused = false;
 
     void Update()
@@ -39,6 +40,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0;
         fpsController.enabled = false;
 
+        phoneScript.enabled = false;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -52,6 +55,9 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         fpsController.enabled = true;
+
+        phoneScript.enabled = true;
+
         
         Debug.Log("Game unpaused.");
     }
