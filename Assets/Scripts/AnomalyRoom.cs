@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnomalyRoom : MonoBehaviour
 {
     private string preAnomalyTag = "AnomalyObjectPre";
+    private string postAnomalyTag = "AnomalyObjectPost";
     private GameObject[] anomalyObjects;
     public Dictionary<Transform, List<Transform>> anomalies;
     public Transform activeAnomaly = null;
@@ -20,7 +21,7 @@ public class AnomalyRoom : MonoBehaviour
         List<GameObject> roomObjects = new();
         foreach (Transform roomTransforms in transform.GetComponentsInChildren<Transform>())
         {
-            if (roomTransforms.gameObject.tag.Contains(preAnomalyTag))
+            if (roomTransforms.gameObject.tag == preAnomalyTag)
             {
                 roomObjects.Add(roomTransforms.gameObject);
             }
@@ -35,16 +36,32 @@ public class AnomalyRoom : MonoBehaviour
         Transform postFolder = anomalyObjects[0].transform.parent.parent.GetChild(1);
         foreach (GameObject anomaly in anomalyObjects)
         {
-            foreach (Transform anomalyPostFolder in postFolder.GetComponentsInChildren<Transform>())
+            foreach (Transform anomaliesPostFolder in postFolder.GetComponentsInChildren<Transform>())
             {
-                if (anomalyPostFolder.name == anomaly.name)
+                // Only get folders for anomalies, inside the Post folder
+                if (anomaliesPostFolder.name != anomaly.name)
                 {
-                    anomalies[anomaly.transform] = new (anomalyPostFolder.GetComponentsInChildren<Transform>(true));
-                    anomalies[anomaly.transform].Remove(anomalyPostFolder); // GetComponentsInChildren also adds itself, so we need to remove it
-                    foreach (Transform anomalyPost in anomalies[anomaly.transform])
+                    continue;
+                }
+
+                List<Transform> postAnomalies = new List<Transform>();
+                foreach (Transform anomalyPost in anomaliesPostFolder.GetComponentsInChildren<Transform>(true))
+                {
+                    // Only get objects that are anomalies
+                    if (anomalyPost.tag == postAnomalyTag)
                     {
-                        anomalyPost.gameObject.SetActive(false);
+                        postAnomalies.Add(anomalyPost);
                     }
+                }
+                if (postAnomalies.Count > 0)
+                {
+                    anomalies[anomaly.transform] = postAnomalies;
+                }
+
+                // Hide all anomalies
+                foreach (Transform anomalyPost in anomalies[anomaly.transform])
+                {
+                    anomalyPost.gameObject.SetActive(false);
                 }
             }
         }
