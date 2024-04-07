@@ -9,6 +9,7 @@ public class AnomalyRoom : MonoBehaviour
     private GameObject[] anomalyObjects;
     public Dictionary<Transform, List<Transform>> anomalies;
     public Transform activeAnomaly = null;
+    public string activeAnomalyName = null;
 
     public float spawnPointX;
     public float spawnPointY;
@@ -101,6 +102,7 @@ public class AnomalyRoom : MonoBehaviour
             (Transform randomAnomalyPre, List<Transform> anomalyPost) = anomalies.ElementAt(Random.Range(0, anomalies.Count));
             Transform randomAnomalyPost = anomalyPost[Random.Range(0, anomalyPost.Count)];
             activeAnomaly = randomAnomalyPre;
+            activeAnomalyName = randomAnomalyPost.name;
             randomAnomalyPre.gameObject.SetActive(false);
             randomAnomalyPost.gameObject.SetActive(true);
             Debug.Log("Summoned anomaly " + randomAnomalyPost.name + " on " + randomAnomalyPre.name + " in room " + name);
@@ -127,18 +129,19 @@ public class AnomalyRoom : MonoBehaviour
             return false;
         }
 
-        if (anomalyName != activeAnomaly.name)
+        if (anomalyName != activeAnomalyName)
         {
-            Debug.Log("The anomaly in the " + gameObject.name + " was incorrect!");
+            Debug.Log("The anomaly in the " + gameObject.name + " was incorrect! ("+ anomalyName+" != "+ activeAnomalyName + ")");
             return false;
         }
 
-        activeAnomaly = null;
+        activeAnomalyName = null;
         activeAnomaly.gameObject.SetActive(true);
         foreach (Transform activeAnomaliesPost in anomalies[activeAnomaly])
         {
             activeAnomaliesPost.gameObject.SetActive(false);
         }
+        activeAnomaly = null;
         Debug.Log("The anomaly in the " + gameObject.name + " was correct!");
         return true;
     }
