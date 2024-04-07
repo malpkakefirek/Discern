@@ -4751,9 +4751,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 5
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 5
   player: {fileID: 2073851294}
 --- !u!1 &95772000
 GameObject:
@@ -4825,9 +4826,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 40
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 6
   player: {fileID: 2073851294}
 --- !u!1 &95967330
 GameObject:
@@ -7365,9 +7367,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 5
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 50
   player: {fileID: 2073851294}
 --- !u!1 &148458007
 GameObject:
@@ -23950,9 +23953,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 90
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 51
   player: {fileID: 2073851294}
 --- !u!1 &484483671
 GameObject:
@@ -26333,9 +26337,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 5
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 40
   player: {fileID: 2073851294}
 --- !u!1 &546834555
 GameObject:
@@ -39521,9 +39526,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 91
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 25.5
   player: {fileID: 2073851294}
 --- !u!1 &899729318
 GameObject:
@@ -69740,9 +69746,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 33
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 50
   player: {fileID: 2073851294}
 --- !u!43 &1611820614
 Mesh:
@@ -70108,9 +70115,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 90
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 7.5
   player: {fileID: 2073851294}
 --- !u!1 &1617916064
 GameObject:
@@ -72872,9 +72880,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 91
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 36.5
   player: {fileID: 2073851294}
 --- !u!1 &1669069627
 GameObject:
@@ -73956,9 +73965,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 52
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 51
   player: {fileID: 2073851294}
 --- !u!1 &1690843731
 GameObject:
@@ -75079,9 +75089,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 75
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 27
   player: {fileID: 2073851294}
 --- !u!1 &1728613057
 GameObject:
@@ -75153,9 +75164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 42.5
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 47
   player: {fileID: 2073851294}
 --- !u!43 &1728700409
 Mesh:
@@ -76441,9 +76453,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 72
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 4.5
   player: {fileID: 2073851294}
 --- !u!1 &1750016838
 GameObject:
@@ -86011,9 +86024,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 25
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 7
   player: {fileID: 2073851294}
 --- !u!1 &1995581020
 GameObject:
@@ -87139,9 +87153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 39
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 28
   player: {fileID: 2073851294}
 --- !u!1 &2033654504
 GameObject:
@@ -89049,9 +89064,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 60.5
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 5
   player: {fileID: 2073851294}
 --- !u!1 &2075729896
 GameObject:
@@ -90830,9 +90846,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeAnomaly: {fileID: 0}
-  spawnPointX: -80
+  activeAnomalyName: 
+  spawnPointX: 30
   spawnPointY: 2
-  spawnPointZ: 120
+  spawnPointZ: 4
   player: {fileID: 2073851294}
 --- !u!1 &2130557335
 GameObject:
