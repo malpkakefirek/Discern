@@ -115,7 +115,7 @@ public class F1Menu : MonoBehaviour
                             if (room != null)
                             {
                                 //room.GetComponent<AnomalyRoom>().getActiveAnomaly().fixAnomaly();
-                                gameController.GetComponent<GameController>().attempAnomalyFix(room,"test");
+                                gameController.GetComponent<GameController>().attempAnomalyFix(room, room.GetComponent<AnomalyRoom>().activeAnomalyName);
                                 closeMenu();
                             }
                         }
@@ -127,7 +127,7 @@ public class F1Menu : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     playerController.enabled = false; // Temporarily disable the CharacterController to teleport
-                    player.transform.position = new Vector3(0, 3, 0); // to specify
+                    player.transform.position = new Vector3(1, 2, 1); // to specify
                     playerController.enabled = true;
                     closeMenu();
                 }

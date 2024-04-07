@@ -29,6 +29,7 @@ public class F3Menu : MonoBehaviour
             else
             {
                 isMenuOpen = true;
+                menuText.text = "Infographics:\n";
                 getRoomsInfo();
             }
         }
@@ -38,16 +39,18 @@ public class F3Menu : MonoBehaviour
     {
         foreach (GameObject room in rooms)
         {
-            //menuText.text += room.name+"  |  object: "+ room.GetComponent<AnomalyRoom>().activeAnomaly.gameObject.name + "  |  anomaly: " + room.GetComponent<AnomalyRoom>().activeAnomaly.gameObject.get+ "\n";
+            if(room.GetComponent<AnomalyRoom>().activeAnomaly != null)
+            {
+                menuText.text += room.name + "  |  object: " + room.GetComponent<AnomalyRoom>().activeAnomaly.gameObject.name + "  |  anomaly: " + room.GetComponent<AnomalyRoom>().activeAnomalyName + "\n";
+            }
         }
-        
     }
 
     void RefreshFunction()
     {
         if (isMenuOpen)
         {
-            menuText.text = "";
+            menuText.text = "Infographics:\n";
             getRoomsInfo();
         }
     }
