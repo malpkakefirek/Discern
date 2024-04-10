@@ -12,6 +12,8 @@ public class GuardController : MonoBehaviour
     [SerializeField] private float raycastHeightPercentage = 0.9f;
     [SerializeField] float idleTime = 10f;
     [SerializeField] float deathProximity = 1.5f;
+    [SerializeField] float speed = 4.5f;
+    [SerializeField] float acceleration = 1f;
 
     private float guardHeight;
 
@@ -21,6 +23,7 @@ public class GuardController : MonoBehaviour
     {
         guardHeight = GetComponent<Collider>().bounds.size.y;
         light.spotAngle = detectionAngle;
+        agent.speed = speed;
     }
 
     private float lastCalledTime;
@@ -39,6 +42,7 @@ public class GuardController : MonoBehaviour
             playerDetected();
             Invoke("playerDetected", 1f);
             lastCalledTime = Time.time + 1f;
+            agent.speed += acceleration * Time.deltaTime;
 
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             if (distanceToPlayer <= deathProximity)
@@ -56,6 +60,7 @@ public class GuardController : MonoBehaviour
                     if (Time.time - lastCalledTime >= idleTime)
                     {
                         lastCalledTime = Time.time;
+                        agent.speed = speed;
                         Vector3 randomPosition = GetRandomWalkablePosition();
                         agent.SetDestination(randomPosition);
                     }
@@ -72,7 +77,18 @@ public class GuardController : MonoBehaviour
         }
 
     }
-
+/*    private bool isChasing()
+    {
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+            {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }*/
     public void moveTo(Vector3 position)
     {
         agent.SetDestination(position);
