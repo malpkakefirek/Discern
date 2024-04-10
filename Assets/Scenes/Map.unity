@@ -101411,7 +101411,7 @@ MonoBehaviour:
   player: {fileID: 2073851294}
   light: {fileID: 1409772068}
   detectionAngle: 170
-  maxRayDistance: 30
+  maxRayDistance: 20
   raycastHeightPercentage: 0.37
   idleTime: 10
   deathProximity: 2.25
