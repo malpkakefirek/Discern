@@ -10,12 +10,12 @@ public class GameController : MonoBehaviour
     [SerializeField] int anomalySpawnTimeMin = 15;
     [SerializeField] int anomalySpawnTimeMax = 45;
     [SerializeField] float failCondition = 0.5f;
+    [SerializeField] GameObject player;
 
 
     private int timeToNextAnomaly = 30;
     private int totalAnomalies = 0;
     private int foundAnomalies = 0;
-    private bool phoneOpened = false;
     private List<GameObject> availableRooms;
     // Start is called before the first frame update
     void Start()
@@ -32,16 +32,6 @@ public class GameController : MonoBehaviour
             spawnAnomaly();
             timeToNextAnomaly += Random.Range(anomalySpawnTimeMin, anomalySpawnTimeMax);
         }
-
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            phoneOpened = !phoneOpened;
-            Debug.Log("is phone opened: " + phoneOpened);
-            if (phoneOpened)
-            {
-                openPhone();
-            }
-        }
     }
 
     private void spawnAnomaly()
@@ -51,7 +41,7 @@ public class GameController : MonoBehaviour
             int randomIndex = Random.Range(0, availableRooms.Count);
             GameObject room = availableRooms[randomIndex];
             Debug.Log("Tried spawning anomaly in: " + room.name);
-            if (room.GetComponent<AnomalyRoom>().spawnRandomAnomaly())
+            if (room.GetComponent<AnomalyRoom>().spawnRandomAnomaly(player.transform.position))
             {
                 availableRooms.Remove(room);
                 totalAnomalies++;
@@ -63,21 +53,14 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-
-
     }
-    private void openPhone()
-    {
-        // to be implemented
-        Debug.Log("Anomalies found : " + foundAnomalies + "/" + totalAnomalies);
-    }
-
     public void attempAnomalyFix(GameObject room, string name)
     {
         Debug.Log("Attempted anomaly fix in: " + room.name +" | type: "+ name);
         if (room.GetComponent<AnomalyRoom>().fixAnomaly(name))
         {
             totalAnomalies--;
+            foundAnomalies++;
             availableRooms.Add(room);
         }
     }

@@ -40664,6 +40664,7 @@ MonoBehaviour:
   anomalySpawnTimeMin: 15
   anomalySpawnTimeMax: 45
   failCondition: 0.75
+  player: {fileID: 2073851294}
 --- !u!4 &771947696
 Transform:
   m_ObjectHideFlags: 0
@@ -103116,7 +103117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2073851294}
-  light: {fileID: 1409772068}
+  torchlight: {fileID: 1409772068}
   detectionAngle: 170
   maxRayDistance: 20
   raycastHeightPercentage: 0.37

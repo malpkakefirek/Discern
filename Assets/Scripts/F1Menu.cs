@@ -122,7 +122,7 @@ public class F1Menu : MonoBehaviour
                         {
                             if (!room.GetComponent<AnomalyRoom>().activeAnomaly)
                             {
-                                room.GetComponent<AnomalyRoom>().spawnRandomAnomaly();
+                                room.GetComponent<AnomalyRoom>().spawnRandomAnomaly(player.transform.position);
                             }
                             else
                             {

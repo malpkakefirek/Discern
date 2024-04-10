@@ -95,10 +95,24 @@ public class AnomalyRoom : MonoBehaviour
     {
     }
 
-    public bool spawnRandomAnomaly()
+    public bool spawnRandomAnomaly(Vector3 playerPosition)
     {
         if (anomalies.Count > 0)
         {
+            Collider[] colliders = gameObject.GetComponents<Collider>();
+            if (colliders == null)
+            {
+                Debug.LogWarning(gameObject.name + " does not have any Colliders!");
+                return false;
+            }
+            foreach (Collider collider in colliders)
+            {
+                if (collider.bounds.Contains(playerPosition))
+                {
+                    Debug.Log("Anomaly spawning failed in "+ gameObject.name + " because Player is in that room!");
+                    return false;
+                }
+            }
             (Transform randomAnomalyPre, List<Transform> anomalyPost) = anomalies.ElementAt(Random.Range(0, anomalies.Count));
             Transform randomAnomalyPost = anomalyPost[Random.Range(0, anomalyPost.Count)];
             activeAnomaly = randomAnomalyPre;
