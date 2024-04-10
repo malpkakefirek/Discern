@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -27,6 +28,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+        [SerializeField] private float stamina;
+        [SerializeField] private float stamina_lose_rate = 0.1f;
+        [SerializeField] private float stamina_regen_rate = 0.1f;
+        [SerializeField] private float max_stamina = 1f;
+        [SerializeField] private float time_since_sprint = 0f;
+        [SerializeField] private float stamina_regen_delay = 2f;
+        [SerializeField] private bool stamina_ran_out = false;
+        [SerializeField] private Scrollbar scrollbar;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -45,6 +54,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Use this for initialization
         private void Start()
         {
+            scrollbar.interactable = false;
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -216,6 +226,50 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+            if(stamina<=0 || stamina_ran_out)
+            {
+                speed = m_WalkSpeed;
+            }
+            else if(!m_IsWalking && (horizontal!=0 || vertical != 0))
+            {
+                stamina -= stamina_lose_rate * Time.deltaTime;
+                time_since_sprint = Time.time;
+                if (stamina <= 0)
+                {
+                    stamina_ran_out = true;
+                }
+            }
+
+
+            if (stamina < 1)
+            {
+                scrollbar.size = stamina;
+                scrollbar.gameObject.SetActive(true);
+            }
+            else
+            {
+                scrollbar.gameObject.SetActive(false);
+            }
+
+            if (m_IsWalking || stamina_ran_out)
+            {
+                if (stamina >= max_stamina)
+                {
+                    stamina = max_stamina;
+                }
+                else
+                {
+                    if(Time.time >= time_since_sprint + stamina_regen_delay)
+                    {
+                        stamina += stamina_regen_rate * Time.deltaTime;
+                    }
+                }
+            }
+
+            if (stamina_ran_out && m_IsWalking)
+            {
+                stamina_ran_out = false;
+            }
             m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:
