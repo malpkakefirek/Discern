@@ -11,6 +11,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] MonoBehaviour phoneScript;
     public bool paused = false;
 
+    void Start()
+    {
+        unPauseGame();
+    }
+
     void Update()
     {   
 
