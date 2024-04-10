@@ -8940,7 +8940,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 5.12, y: 9.23}
   m_BounceIntensity: 0.2
@@ -16543,7 +16543,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 5.12, y: 9.23}
   m_BounceIntensity: 0.2
@@ -18047,7 +18047,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 5.12, y: 9.23}
   m_BounceIntensity: 0.2
@@ -22905,7 +22905,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 5.12, y: 9.23}
   m_BounceIntensity: 0.2
@@ -53642,7 +53642,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 5.12, y: 9.23}
   m_BounceIntensity: 0.2
@@ -55973,7 +55973,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 5.12, y: 9.23}
   m_BounceIntensity: 0.2
@@ -59002,7 +59002,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.9245283, g: 0.6789536, b: 0.40557134, a: 1}
-  m_Intensity: 4
+  m_Intensity: 3
   m_Range: 1.5
   m_SpotAngle: 85
   m_InnerSpotAngle: 21.80208
@@ -59041,7 +59041,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0.2
@@ -69754,7 +69754,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 5.12, y: 9.23}
   m_BounceIntensity: 0.2
@@ -78211,7 +78211,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 5.12, y: 9.23}
   m_BounceIntensity: 0.2
