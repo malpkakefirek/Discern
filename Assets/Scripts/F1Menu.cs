@@ -57,7 +57,7 @@ public class F1Menu : MonoBehaviour
                     index -= 1;
                     refreshTextMain();
                 }
-                if (Input.GetKeyDown(KeyCode.DownArrow) && index != rooms.Length - 1)
+                if (Input.GetKeyDown(KeyCode.DownArrow) && index != 2)
                 {
                     index += 1;
                     refreshTextMain();
