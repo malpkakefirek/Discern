@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor;
 
 public class PhoneScript : MonoBehaviour
 {
@@ -10,6 +9,16 @@ public class PhoneScript : MonoBehaviour
     [SerializeField] GameObject roomPanel;
     [SerializeField] GameObject anomalyPanel;
     [SerializeField] GameController gameController;
+    [SerializeField] private string reporting = "Reporting";
+    [SerializeField] Color reportingColor;
+    [SerializeField] float reportingTime = 5f;
+    [SerializeField] private string reportingSuccess = "Anomaly removed!";
+    [SerializeField] Color reportingSuccessColor;
+    [SerializeField] float reportingSuccessTime = 2f;
+    [SerializeField] private string reportingFail = "Anomaly NOT found!";
+    [SerializeField] Color reportingFailColor;
+    [SerializeField] float reportingFailTime = 2f;
+    [SerializeField] GameObject reportingPanel;
     private bool phoneUp = false;
 
     private GameObject[] rooms;
@@ -36,10 +45,12 @@ public class PhoneScript : MonoBehaviour
 
     private TextMeshProUGUI roomPanelText;
     private TextMeshProUGUI anomalyPanelText;
+    private TextMeshProUGUI reportingPanelText;
     //private string listOfAnomalies;
     private bool selectedRoom = false;
     private int selectedRoomIndex = 0;
     private string selectedAnomaly;
+    private bool isReporting = false;
 
     void Start()
     {
@@ -48,6 +59,8 @@ public class PhoneScript : MonoBehaviour
         roomPanelText = roomPanel.GetComponentInChildren<TextMeshProUGUI>();
 
         anomalyPanelText = anomalyPanel.GetComponentInChildren<TextMeshProUGUI>();
+
+        reportingPanelText = reportingPanel.GetComponentInChildren<TextMeshProUGUI>();
 
         rooms = GameObject.FindGameObjectsWithTag("AnomalyRoom");
         refreshTextRooms();
@@ -129,10 +142,15 @@ public class PhoneScript : MonoBehaviour
                 phoneUp = true;
                 phoneMenu.SetActive(true);
                 anomalyPanel.SetActive(false);
-                roomPanel.SetActive(true);
+                roomPanel.SetActive(!isReporting);
+                reportingPanel.SetActive(isReporting);
                 index = 0;
                 Debug.Log("Phone up.");
             }
+        }
+        if (isReporting)
+        {
+            return;
         }
 
         if (!phoneUp)
@@ -212,15 +230,18 @@ public class PhoneScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                isReporting = true;
                 selectedAnomaly = anomalies[index];
 
-                gameController.attempAnomalyFix(rooms[selectedRoomIndex], selectedAnomaly);
+                //gameController.attempAnomalyFix(rooms[selectedRoomIndex], selectedAnomaly);
 
                 selectedRoom = false;
 
                 anomalyPanel.SetActive(false);
+                roomPanel.SetActive(false);
 
-                roomPanel.SetActive(true);
+                showReportingPanel();
+
 
                 index = 0;
 
@@ -251,17 +272,66 @@ public class PhoneScript : MonoBehaviour
 
 
     }
-/*
-    KeyCode GetObjectKeyCode(int roomIndex)
+
+    private void showReportingPanel()
     {
-        if (roomIndex < 9)
+        reportingPanelText.color = reportingColor;
+        reportingPanelText.text = reporting;
+        reportingPanel.SetActive(true);
+        //Debug.Log(reporting);
+        Invoke("addDot", reportingTime / 4f);
+        Invoke("addDot", 2*reportingTime / 4f);
+        Invoke("addDot", 3*reportingTime / 4f);
+        Invoke("showReportingAfter", reportingTime);
+    }
+    private void addDot()
+    {
+        reportingPanelText.text += ".";
+    }
+    private void showReportingAfter()
+    {
+        bool isSuccess = gameController.attempAnomalyFixBool(rooms[selectedRoomIndex], selectedAnomaly);
+        if (isSuccess)
         {
-            return KeyCode.Alpha1 + roomIndex;
+            showReportingAfterSuccess();
         }
         else
         {
-            return KeyCode.F1 + (roomIndex - 9);
+            showReportingAfterFail();
         }
-    }*/
+    }
+    private void showReportingAfterSuccess()
+    {
+        //Debug.Log(reportingSuccess);
+        reportingPanelText.color = reportingSuccessColor;
+        reportingPanelText.text = reportingSuccess;
+        Invoke("closeReporting", reportingSuccessTime);
+    }
+    private void showReportingAfterFail()
+    {
+        //Debug.Log(reportingFail);
+        reportingPanelText.color = reportingFailColor;
+        reportingPanelText.text = reportingFail;
+        Invoke("closeReporting", reportingFailTime);
+    }
+    private void closeReporting()
+    {
+        //Debug.Log("Reporting Finished");
+        reportingPanel.SetActive(false);
+        roomPanel.SetActive(true);
+        isReporting = false;
+    }
+    /*
+        KeyCode GetObjectKeyCode(int roomIndex)
+        {
+            if (roomIndex < 9)
+            {
+                return KeyCode.Alpha1 + roomIndex;
+            }
+            else
+            {
+                return KeyCode.F1 + (roomIndex - 9);
+            }
+        }*/
 }
 

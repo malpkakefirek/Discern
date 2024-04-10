@@ -64,4 +64,16 @@ public class GameController : MonoBehaviour
             availableRooms.Add(room);
         }
     }
+    public bool attempAnomalyFixBool(GameObject room, string name)
+    {
+        Debug.Log("Attempted anomaly fix in: " + room.name + " | type: " + name);
+        if (room.GetComponent<AnomalyRoom>().fixAnomaly(name))
+        {
+            totalAnomalies--;
+            foundAnomalies++;
+            availableRooms.Add(room);
+            return true;
+        }
+        return false;
+    }
 }
