@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class GuardController : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] Light light;
+    [SerializeField] Light torchlight;
     [SerializeField] float detectionAngle = 90f;
     [SerializeField] int maxRayDistance = 30;
     [SerializeField] private float raycastHeightPercentage = 0.9f;
@@ -22,7 +22,7 @@ public class GuardController : MonoBehaviour
     void Start()
     {
         guardHeight = GetComponent<Collider>().bounds.size.y;
-        light.spotAngle = detectionAngle;
+        torchlight.spotAngle = detectionAngle;
         agent.speed = speed;
     }
 
@@ -56,7 +56,7 @@ public class GuardController : MonoBehaviour
             {
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {
-                    light.color = Color.green;
+                    torchlight.color = Color.green;
                     if (Time.time - lastCalledTime >= idleTime)
                     {
                         lastCalledTime = Time.time;
@@ -147,7 +147,7 @@ public class GuardController : MonoBehaviour
 
     void playerDetected()
     {
-        light.color = Color.red;
+        torchlight.color = Color.red;
         moveTo(player.transform.position);
     }
 }
