@@ -62,4 +62,9 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Game unpaused.");
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }
