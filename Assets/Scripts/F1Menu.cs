@@ -3,41 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
+using System;
+using UnityEngine.Rendering;
 
 public class F1Menu : MonoBehaviour
 {
     private GameObject[] rooms;
     private bool isMenuOpen = false;
     private int subMenu = 0;
+    private int index = 0;
     [SerializeField] TextMeshProUGUI menuText;
     [SerializeField] GameObject panel;
     [SerializeField] GameObject player;
     [SerializeField] GameObject gameController;
     private CharacterController playerController;
-    private Dictionary<KeyCode, GameObject> roomKeyBindings = new Dictionary<KeyCode, GameObject>();
     // Start is called before the first frame update
     void Start()
     {
         panel.SetActive(false);
         rooms = GameObject.FindGameObjectsWithTag("AnomalyRoom");
-        for (int i = 0; i < rooms.Length; i++)
-        {
-            KeyCode roomKey = GetObjectKeyCode(i);
-            roomKeyBindings.Add(roomKey, rooms[i]);
-        }
         playerController = player.GetComponent<CharacterController>();
         InvokeRepeating("RefreshFunction", 0f, 1f); //refresh every 1 sec
-    }
-    KeyCode GetObjectKeyCode(int roomIndex)
-    {
-        if (roomIndex < 9)
-        {
-            return KeyCode.Alpha1 + roomIndex;
-        }
-        else
-        {
-            return KeyCode.F1 + (roomIndex - 9);
-        }
     }
 
     // Update is called once per frame
@@ -54,6 +41,8 @@ public class F1Menu : MonoBehaviour
             }
             else
             {
+                index = 0;
+                refreshTextMain();
                 panel.SetActive(true);
                 isMenuOpen = true;
             }
@@ -63,183 +52,147 @@ public class F1Menu : MonoBehaviour
         {
             if (subMenu == 0)
             {
-                if (Input.GetKeyDown(KeyCode.Alpha1)) // spawn Anomaly
+                if (Input.GetKeyDown(KeyCode.UpArrow) && index != 0)
                 {
-                    menuText.text = "";
-                    foreach (var room in roomKeyBindings)
-                    {
-                        menuText.text += room.Key + " " + room.Value.name + "\n";
-                    }
-                    /*int count = 1;
-                    foreach (GameObject room in rooms)
-                    {
-                        menuText.text += count + " - " + room.name+"\n";
-                        count++;
-                    }*/
-                    subMenu = 1;
+                    index -= 1;
+                    refreshTextMain();
                 }
-                if (Input.GetKeyDown(KeyCode.Alpha2)) // fix Anomaly
+                if (Input.GetKeyDown(KeyCode.DownArrow) && index != rooms.Length - 1)
                 {
-                    menuText.text = "";
-                    foreach (var room in roomKeyBindings)
-                    {
-                        menuText.text += room.Key + " " + room.Value.name + "\n";
-                    }
-                    /*int count = 1;
-                    foreach (GameObject room in rooms)
-                    {
-                        menuText.text += count + " - " + room.name + "\n";
-                        count++;
-                    }*/
-                    subMenu = 2;
+                    index += 1;
+                    refreshTextMain();
                 }
-                if (Input.GetKeyDown(KeyCode.Alpha3)) // teleport Player
+                if (Input.GetKeyDown(KeyCode.Return)) // spawn Anomaly
                 {
-                    //menuText.text = "1 - Spawn\n";
-                    menuText.text = "";
-                    foreach (var room in roomKeyBindings)
-                    {
-                        menuText.text += room.Key + " " + room.Value.name + "\n";
-                    }
-                    /*int count = 2;
-                    foreach (GameObject room in rooms)
-                    {
-                        menuText.text += count + " - " + room.name + "\n";
-                        count++;
-                    }*/
-                    subMenu = 3;
+                    subMenu = index + 1;
+                    index = 0;
+                    refreshText();
                 }
             }
             else if (subMenu == 1)
             {
-
-                foreach (var kvp in roomKeyBindings)
+                if (Input.GetKeyDown(KeyCode.UpArrow) && index != 0)
                 {
-                    if (Input.GetKeyDown(kvp.Key))
-                    {
-                        GameObject room = kvp.Value;
-                        if (room != null)
-                        {
-                            if (!room.GetComponent<AnomalyRoom>().activeAnomaly)
-                            {
-                                room.GetComponent<AnomalyRoom>().spawnRandomAnomaly(player.transform.position);
-                            }
-                            else
-                            {
-                                Debug.Log("Anomaly in this room already exists");
-                            }
+                    index -= 1;
+                    refreshText();
+                }
+                if (Input.GetKeyDown(KeyCode.DownArrow) && index != rooms.Length-1)
+                {
+                    index += 1;
+                    refreshText();
+                }
 
-                            closeMenu();
-                            break;
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    GameObject room = rooms[index];
+                    if (room != null)
+                    {
+                        if (!room.GetComponent<AnomalyRoom>().activeAnomaly)
+                        {
+                            room.GetComponent<AnomalyRoom>().spawnRandomAnomaly(player.transform.position);
                         }
+                        else
+                        {
+                            Debug.Log("Anomaly in this room already exists");
+                        }      
+                        closeMenu();
                     }
                 }
-                /*for (int i = 1; i <= 9; i++)
-                {
-                    if (Input.GetKeyDown(KeyCode.Alpha0 + i))
-                    {
-                        if (i - 1 < rooms.Length)
-                        {
-                            GameObject room = rooms[i - 1];
-                            if (room != null)
-                            {
-                                if (!room.GetComponent<AnomalyRoom>().activeAnomaly)
-                                {
-                                    room.GetComponent<AnomalyRoom>().spawnRandomAnomaly();
-                                }
-                                else
-                                {
-                                    Debug.Log("Anomaly in this room already exists");
-                                }
-                                    
-                                closeMenu();
-                            }
-                        }
-                        break;
-                    }
-                }*/
+                
             }
             else if (subMenu == 2)
             {
-                foreach (var kvp in roomKeyBindings)
+                if (Input.GetKeyDown(KeyCode.UpArrow) && index != 0)
                 {
-                    if (Input.GetKeyDown(kvp.Key))
+                    index -= 1;
+                    refreshText();
+                }
+                if (Input.GetKeyDown(KeyCode.DownArrow) && index != rooms.Length - 1)
+                {
+                    index += 1;
+                    refreshText();
+                }
+
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    GameObject room = rooms[index];
+                    if (room != null)
                     {
-                        GameObject room = kvp.Value;
-                        if (room != null)
-                        {
-                            //room.GetComponent<AnomalyRoom>().getActiveAnomaly().fixAnomaly();
-                            gameController.GetComponent<GameController>().attempAnomalyFix(room, room.GetComponent<AnomalyRoom>().activeAnomalyName);
-                            closeMenu();
-                            break;
-                        }
+                        gameController.GetComponent<GameController>().attempAnomalyFix(room, room.GetComponent<AnomalyRoom>().activeAnomalyName);
+                        closeMenu();
                     }
                 }
-                /*for (int i = 1; i <= 9; i++)
-                {
-                    if (Input.GetKeyDown(KeyCode.Alpha0 + i))
-                    {
-                        if (i-1 < rooms.Length)
-                        {
-                            GameObject room = rooms[i-1];
-                            if (room != null)
-                            {
-                                //room.GetComponent<AnomalyRoom>().getActiveAnomaly().fixAnomaly();
-                                gameController.GetComponent<GameController>().attempAnomalyFix(room, room.GetComponent<AnomalyRoom>().activeAnomalyName);
-                                closeMenu();
-                            }
-                        }
-                        break;
-                    }
-                }*/
             }else if (subMenu == 3)
             {
+                if (Input.GetKeyDown(KeyCode.UpArrow) && index != 0)
+                {
+                    index -= 1;
+                    refreshText();
+                }
+                if (Input.GetKeyDown(KeyCode.DownArrow) && index != rooms.Length - 1)
+                {
+                    index += 1;
+                    refreshText();
+                }
 
-                foreach (var kvp in roomKeyBindings)
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    if (Input.GetKeyDown(kvp.Key))
+                    GameObject room = rooms[index];
+                    if (room != null)
                     {
-                        GameObject room = kvp.Value;
-                        if (room != null)
-                        {
-                            playerController.enabled = false; // Temporarily disable the CharacterController to teleport
-                            player.transform.position = new Vector3(room.GetComponent<AnomalyRoom>().spawnPointX, room.GetComponent<AnomalyRoom>().spawnPointY, room.GetComponent<AnomalyRoom>().spawnPointZ);
-                            playerController.enabled = true;
-                            closeMenu();
-                            break;
-                        }
+                        playerController.enabled = false; // Temporarily disable the CharacterController to teleport
+                        player.transform.position = new Vector3(room.GetComponent<AnomalyRoom>().spawnPointX, room.GetComponent<AnomalyRoom>().spawnPointY, room.GetComponent<AnomalyRoom>().spawnPointZ);
+                        playerController.enabled = true;
+                        closeMenu();
                     }
                 }
-                /*if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    playerController.enabled = false; // Temporarily disable the CharacterController to teleport
-                    player.transform.position = new Vector3(1, 2, 1); // to specify
-                    playerController.enabled = true;
-                    closeMenu();
-                }
-                else
-                {
-                    for (int i = 2; i <= 9; i++)
-                    {
-                        if (Input.GetKeyDown(KeyCode.Alpha0 + i))
-                        {
-                            if (i - 2 < rooms.Length)
-                            {
-                                GameObject room = rooms[i - 2];
-                                if (room != null)
-                                {
-                                    playerController.enabled = false; // Temporarily disable the CharacterController to teleport
-                                    player.transform.position = new Vector3(room.GetComponent<AnomalyRoom>().spawnPointX, room.GetComponent<AnomalyRoom>().spawnPointY, room.GetComponent<AnomalyRoom>().spawnPointZ);
-                                    playerController.enabled = true;
-                                    closeMenu();
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }*/
             }
         }
+    }
+
+    private void refreshText()
+    {
+        menuText.text = "";
+        for (int i = 0; i < rooms.Length; i++)
+        {
+            if (i == index)
+            {
+                menuText.text += "<color=yellow>" + rooms[i].name + "</color>\n";
+            }
+            else
+            {
+                menuText.text += rooms[i].name + "\n";
+            }
+        }
+    }
+    private void refreshTextMain()
+    {
+        menuText.text = "";
+        if(index == 0)
+        {
+            menuText.text += "<color=yellow>Spawn Anomaly</color>\n";
+        }
+        else
+        {
+            menuText.text += "Spawn Anomaly\n";
+        }
+        if (index == 1)
+        {
+            menuText.text += "<color=yellow>Fix Anomaly</color>\n";
+        }
+        else
+        {
+            menuText.text += "Fix Anomaly\n";
+        }
+        if (index == 2)
+        {
+            menuText.text += "<color=yellow>Teleport</color>";
+        }
+        else
+        {
+            menuText.text += "Teleport";
+        }
+        
     }
     void RefreshFunction()
     {
@@ -252,8 +205,10 @@ public class F1Menu : MonoBehaviour
     private void closeMenu()
     {
         panel.SetActive(false);
-        menuText.text = "1 - Spawn Anomaly\n2 - Fix Anomaly\n3 - Teleport";
+        menuText.text = "<color=yellow>Spawn Anomaly<color>\n";
+        menuText.text += "Fix Anomaly\nTeleport";
         subMenu = 0;
+        index = 0;
         isMenuOpen = false;
     }
 }
