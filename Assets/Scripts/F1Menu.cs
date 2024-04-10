@@ -47,7 +47,10 @@ public class F1Menu : MonoBehaviour
         {
             if (isMenuOpen)
             {
-                closeMenu();
+                if (subMenu == 0)
+                {
+                    closeMenu();
+                }
             }
             else
             {
