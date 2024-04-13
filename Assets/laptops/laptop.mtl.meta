@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ec8e1a48029274f4f92585160ec683a9
+timeCreated: 1489652182
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 83569
+  packageName: Laptop's Package
+  packageVersion: 1.0
+  assetPath: Assets/laptops/laptop.mtl
+  uploadId: 168087

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d3e1afc49ad51f943b9471a4d7055c07
+timeCreated: 1487586660
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 83569
+  packageName: Laptop's Package
+  packageVersion: 1.0
+  assetPath: Assets/laptops/Materials/black_laptop_OFF.mat
+  uploadId: 168087

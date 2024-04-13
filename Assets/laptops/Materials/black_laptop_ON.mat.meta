@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9007c3faf74549c4697bb8e10e7a3e21
+timeCreated: 1487312657
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 83569
+  packageName: Laptop's Package
+  packageVersion: 1.0
+  assetPath: Assets/laptops/Materials/black_laptop_ON.mat
+  uploadId: 168087
