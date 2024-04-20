@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 955e9baf3e922734e8012c49a8a39fb1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 121654
+  packageName: DS Arcade Machine
+  packageVersion: 1.0
+  assetPath: Assets/danthaigames/DS Arcade Pack 01/Prefabs/ArcadeCabinet_03.prefab
+  uploadId: 252883

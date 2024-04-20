@@ -1,0 +1,272 @@
+fileFormatVersion: 2
+guid: 1f48ffec443b1ed448207d1db234fe97
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Coin Insert
+    100004: Button Surround
+    100006: Button Surround.001
+    100008: Button Surround.002
+    100010: Cabinet
+    100012: Joystick
+    100014: Button Surround.003
+    100016: Button Surround.004
+    100018: Button Surround.005
+    100020: Button Surround.006
+    100022: Button Surround.007
+    100024: Joystick.001
+    100026: Button L 1
+    100028: Button L 2
+    100030: Button L 3
+    100032: Button R 1
+    100034: Button R 2
+    100036: Button R 3
+    100038: Joystick L
+    100040: Joystick R
+    100042: Screw
+    100044: Screw.001
+    100046: Screw.002
+    100048: Screw.003
+    100050: Button 01 L
+    100052: Button 01 R
+    100054: Button 02 L
+    100056: Button 02 R
+    100058: Button 03 L
+    100060: Button 03 R
+    100062: Joy Stick L
+    100064: Joy Stick R
+    400000: //RootNode
+    400002: Coin Insert
+    400004: Button Surround
+    400006: Button Surround.001
+    400008: Button Surround.002
+    400010: Cabinet
+    400012: Joystick
+    400014: Button Surround.003
+    400016: Button Surround.004
+    400018: Button Surround.005
+    400020: Button Surround.006
+    400022: Button Surround.007
+    400024: Joystick.001
+    400026: Button L 1
+    400028: Button L 2
+    400030: Button L 3
+    400032: Button R 1
+    400034: Button R 2
+    400036: Button R 3
+    400038: Joystick L
+    400040: Joystick R
+    400042: Screw
+    400044: Screw.001
+    400046: Screw.002
+    400048: Screw.003
+    400050: Button 01 L
+    400052: Button 01 R
+    400054: Button 02 L
+    400056: Button 02 R
+    400058: Button 03 L
+    400060: Button 03 R
+    400062: Joy Stick L
+    400064: Joy Stick R
+    2100000: No Name
+    2100002: Arcade Machine Material
+    2100004: Button Material
+    2100006: Joystick Plastic Top
+    2100008: Joystick Plastic Base
+    2100010: Joystick Metal
+    2100012: Plastic Black Surrounds
+    2100014: Arcade Metal
+    2100016: Joystick Plastic Base.001
+    2100018: Joystick Metal.001
+    2100020: Joystick Plastic Top.001
+    2100022: Button Material.001
+    2100024: Screen
+    2300000: //RootNode
+    2300002: Coin Insert
+    2300004: Button Surround
+    2300006: Button Surround.001
+    2300008: Button Surround.002
+    2300010: Cabinet
+    2300012: Joystick
+    2300014: Button Surround.003
+    2300016: Button Surround.004
+    2300018: Button Surround.005
+    2300020: Button Surround.006
+    2300022: Button Surround.007
+    2300024: Joystick.001
+    2300026: Button L 1
+    2300028: Button L 2
+    2300030: Button L 3
+    2300032: Button R 1
+    2300034: Button R 2
+    2300036: Button R 3
+    2300038: Joystick L
+    2300040: Joystick R
+    2300042: Screw
+    2300044: Screw.001
+    2300046: Screw.002
+    2300048: Screw.003
+    2300050: Button 01 L
+    2300052: Button 01 R
+    2300054: Button 02 L
+    2300056: Button 02 R
+    2300058: Button 03 L
+    2300060: Button 03 R
+    2300062: Joy Stick L
+    2300064: Joy Stick R
+    3300000: //RootNode
+    3300002: Coin Insert
+    3300004: Button Surround
+    3300006: Button Surround.001
+    3300008: Button Surround.002
+    3300010: Cabinet
+    3300012: Joystick
+    3300014: Button Surround.003
+    3300016: Button Surround.004
+    3300018: Button Surround.005
+    3300020: Button Surround.006
+    3300022: Button Surround.007
+    3300024: Joystick.001
+    3300026: Button L 1
+    3300028: Button L 2
+    3300030: Button L 3
+    3300032: Button R 1
+    3300034: Button R 2
+    3300036: Button R 3
+    3300038: Joystick L
+    3300040: Joystick R
+    3300042: Screw
+    3300044: Screw.001
+    3300046: Screw.002
+    3300048: Screw.003
+    3300050: Button 01 L
+    3300052: Button 01 R
+    3300054: Button 02 L
+    3300056: Button 02 R
+    3300058: Button 03 L
+    3300060: Button 03 R
+    3300062: Joy Stick L
+    3300064: Joy Stick R
+    4300000: Cube
+    4300002: Cabinet
+    4300004: Coin Insert
+    4300006: Button Surround.002
+    4300008: Button Surround.001
+    4300010: Button Surround
+    4300012: Joystick
+    4300014: Button Surround.007
+    4300016: Button Surround.006
+    4300018: Button Surround.005
+    4300020: Button Surround.004
+    4300022: Button Surround.003
+    4300024: Joystick.001
+    4300026: Screw
+    4300028: Button L 3
+    4300030: Button L 2
+    4300032: Button R 3
+    4300034: Button R 2
+    4300036: Button L 1
+    4300038: Joystick L
+    4300040: Joystick R
+    4300042: Button R 1
+    4300044: Screw.003
+    4300046: Screw.002
+    4300048: Screw.001
+    4300050: Joy Stick R
+    4300052: Button 02 R
+    4300054: Button 01 R
+    4300056: Button 03 R
+    4300058: Joy Stick L
+    4300060: Button 02 L
+    4300062: Button 03 L
+    4300064: Button 01 L
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 121654
+  packageName: DS Arcade Machine
+  packageVersion: 1.0
+  assetPath: Assets/danthaigames/DS Arcade Pack 01/FBX/ArcadeCabinet.fbx
+  uploadId: 252883
