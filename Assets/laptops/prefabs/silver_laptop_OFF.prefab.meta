@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dfd76244b347e574ab42d4a714fe7d99
+timeCreated: 1489657740
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 83569
+  packageName: Laptop's Package
+  packageVersion: 1.0
+  assetPath: Assets/laptops/prefabs/silver_laptop_OFF.prefab
+  uploadId: 168087

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 32bb8ef282dde5d4e897ac51a7e4d57a
+timeCreated: 1487584150
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 83569
+  packageName: Laptop's Package
+  packageVersion: 1.0
+  assetPath: Assets/laptops/Materials/silver_white_laptop_ON.mat
+  uploadId: 168087
