@@ -5,14 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    private const int LOADING_SCENE = 3;
 
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadSceneAsync(LOADING_SCENE);
     }
 
     public void QuitGame()
     {
         Application.Quit();
     }
+
 }
