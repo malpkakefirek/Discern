@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using System.Linq;
 
 public class PhoneScript : MonoBehaviour
 {
     [SerializeField] GameObject phoneMenu;
     [SerializeField] GameObject roomPanel;
     [SerializeField] GameObject anomalyPanel;
+    [SerializeField] Button defaultRoomButton;
     [SerializeField] GameController gameController;
     [SerializeField] private string reporting = "Reporting";
     [SerializeField] Color reportingColor;
@@ -21,7 +24,7 @@ public class PhoneScript : MonoBehaviour
     [SerializeField] GameObject reportingPanel;
     private bool phoneUp = false;
 
-    private GameObject[] rooms;
+    private List<GameObject> rooms;
     private int index;
 
     //private List<GameObject> availableRooms;
@@ -43,7 +46,7 @@ public class PhoneScript : MonoBehaviour
         "room anomaly"
     };
 
-    private TextMeshProUGUI roomPanelText;
+    // private TextMeshProUGUI roomPanelText;
     private TextMeshProUGUI anomalyPanelText;
     private TextMeshProUGUI reportingPanelText;
     //private string listOfAnomalies;
@@ -51,19 +54,20 @@ public class PhoneScript : MonoBehaviour
     private int selectedRoomIndex = 0;
     private string selectedAnomaly;
     private bool isReporting = false;
+    private bool cooldownPassed = false; // cooldown to fix an issue with immediate anomaly selection
 
     void Start()
     {
         //availableRooms = new List<GameObject>(GameObject.FindGameObjectsWithTag("AnomalyRoom"));
 
-        roomPanelText = roomPanel.GetComponentInChildren<TextMeshProUGUI>();
+        // roomPanelText = roomPanel.GetComponentInChildren<TextMeshProUGUI>();
 
         anomalyPanelText = anomalyPanel.GetComponentInChildren<TextMeshProUGUI>();
 
         reportingPanelText = reportingPanel.GetComponentInChildren<TextMeshProUGUI>();
 
-        rooms = GameObject.FindGameObjectsWithTag("AnomalyRoom");
-        refreshTextRooms();
+        rooms = new List<GameObject>(GameObject.FindGameObjectsWithTag("AnomalyRoom").OrderBy(p => p.name).ToList());
+        // refreshTextRooms();
         refreshTextAnomalies();
         anomalyPanel.SetActive(false);
         roomPanel.SetActive(true);
@@ -94,21 +98,21 @@ public class PhoneScript : MonoBehaviour
 
     }
 
-    private void refreshTextRooms()
-    {
-        roomPanelText.text = "";
-        for (int i = 0; i < rooms.Length; i++)
-        {
-            if (i == index)
-            {
-                roomPanelText.text += "<color=yellow>" + rooms[i].name + "</color>\n";
-            }
-            else
-            {
-                roomPanelText.text += rooms[i].name + "\n";
-            }
-        }
-    }
+    // private void refreshTextRooms()
+    // {
+    //     roomPanelText.text = "";
+    //     for (int i = 0; i < rooms.Length; i++)
+    //     {
+    //         if (i == index)
+    //         {
+    //             roomPanelText.text += "<color=yellow>" + rooms[i].name + "</color>\n";
+    //         }
+    //         else
+    //         {
+    //             roomPanelText.text += rooms[i].name + "\n";
+    //         }
+    //     }
+    // }
     private void refreshTextAnomalies()
     {
         anomalyPanelText.text = "Press Q to go back. \n\nSelected Room: " + rooms[selectedRoomIndex].name + "\n\nAnomalies: \n";
@@ -123,6 +127,22 @@ public class PhoneScript : MonoBehaviour
                 anomalyPanelText.text += anomalies[i] + "\n";
             }
         }
+    }
+
+    public void SelectRoom(int roomNumber)
+    {
+        if (selectedRoom)
+        {
+            return;
+        }
+
+        index = 0;
+        selectedRoomIndex = roomNumber;
+        anomalyPanel.SetActive(true);
+        roomPanel.SetActive(false);
+        selectedRoom = true;
+        refreshTextAnomalies();
+        Debug.Log("Selected room: " + rooms[selectedRoomIndex].name);
     }
 
     void Update()
@@ -144,6 +164,7 @@ public class PhoneScript : MonoBehaviour
                 anomalyPanel.SetActive(false);
                 roomPanel.SetActive(!isReporting);
                 reportingPanel.SetActive(isReporting);
+                defaultRoomButton.Select();
                 index = 0;
                 Debug.Log("Phone up.");
             }
@@ -161,27 +182,27 @@ public class PhoneScript : MonoBehaviour
         if (!selectedRoom)
         {
 
-            if (Input.GetKeyDown(KeyCode.UpArrow) && index != 0)
-            {
-                index -= 1;
-                refreshTextRooms();
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow) && index != rooms.Length - 1)
-            {
-                index += 1;
-                refreshTextRooms();
-            }
+            // if (Input.GetKeyDown(KeyCode.UpArrow) && index != 0)
+            // {
+            //     index -= 1;
+            //     // refreshTextRooms();
+            // }
+            // if (Input.GetKeyDown(KeyCode.DownArrow) && index != rooms.Length - 1)
+            // {
+            //     index += 1;
+            //     // refreshTextRooms();
+            // }
 
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                selectedRoomIndex = index;
-                index = 0;
-                anomalyPanel.SetActive(true);
-                roomPanel.SetActive(false);
-                selectedRoom = true;
-                refreshTextAnomalies();
-                Debug.Log("Selected room: " + rooms[selectedRoomIndex].name);
-            }
+            // if (Input.GetKeyDown(KeyCode.Return))
+            // {
+            //     selectedRoomIndex = index;
+            //     index = 0;
+            //     anomalyPanel.SetActive(true);
+            //     roomPanel.SetActive(false);
+            //     selectedRoom = true;
+            //     refreshTextAnomalies();
+            //     Debug.Log("Selected room: " + rooms[selectedRoomIndex].name);
+            // }
             /*
             foreach (var kvp in roomKeyBindings)
             {
@@ -214,7 +235,7 @@ public class PhoneScript : MonoBehaviour
 
                 index = 0;
 
-                refreshTextRooms();
+                // refreshTextRooms();
             }
 
             if (Input.GetKeyDown(KeyCode.UpArrow) && index != 0)
@@ -228,7 +249,7 @@ public class PhoneScript : MonoBehaviour
                 refreshTextAnomalies();
             }
 
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) & cooldownPassed)
             {
                 isReporting = true;
                 selectedAnomaly = anomalies[index];
@@ -244,8 +265,13 @@ public class PhoneScript : MonoBehaviour
 
 
                 index = 0;
+                cooldownPassed = false;
 
-                refreshTextRooms();
+                // refreshTextRooms();
+            }
+            else
+            {
+                cooldownPassed = true;
             }
 
             /*
