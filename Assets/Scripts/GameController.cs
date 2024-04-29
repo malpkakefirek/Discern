@@ -28,6 +28,9 @@ public class GameController : MonoBehaviour
     [System.Serializable]
     public class GameTime
     {
+        [Header("Run Time Editables"), Tooltip("Increase to move time forward")]
+        public float raw;
+
         [Header("Editable Options"), Space, Tooltip("Start time in Minutes"), Range(0, 59)]
         public int startMinutes;
         [Tooltip("Start time in Hours"), Range(0, 23)]
@@ -35,8 +38,7 @@ public class GameController : MonoBehaviour
         [Tooltip("Real Time in seconds per Hour in Game")]
         public int timePerHour;
 
-        [Header("NON Editable Options"),Tooltip("Raw time since start Time.time")]
-        public float raw;
+        [Header("NON Editable Options")]
         [Tooltip("Calculated time in Minutes")]
         public int minutes;
         [Tooltip("Calculated time in Hours")]
