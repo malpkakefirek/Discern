@@ -6,6 +6,7 @@ using TMPro;
 public class F3Menu : MonoBehaviour
 {
     private GameObject[] rooms;
+    [SerializeField] GameObject gameController;
     [SerializeField] TextMeshProUGUI menuText;
 
     private bool isMenuOpen = false;
@@ -29,7 +30,8 @@ public class F3Menu : MonoBehaviour
             else
             {
                 isMenuOpen = true;
-                menuText.text = "Infographics:\n";
+                menuText.text = "Time = " + gameController.GetComponent<GameController>().gameTime.hours + ":" + (gameController.GetComponent<GameController>().gameTime.minutes<10?"0"+ gameController.GetComponent<GameController>().gameTime.minutes: gameController.GetComponent<GameController>().gameTime.minutes) + "\n";
+                menuText.text += "Infographics:\n";
                 getRoomsInfo();
             }
         }
@@ -50,7 +52,8 @@ public class F3Menu : MonoBehaviour
     {
         if (isMenuOpen)
         {
-            menuText.text = "Infographics:\n";
+            menuText.text = "Time = " + gameController.GetComponent<GameController>().gameTime.hours + ":" + (gameController.GetComponent<GameController>().gameTime.minutes < 10 ? "0" + gameController.GetComponent<GameController>().gameTime.minutes : gameController.GetComponent<GameController>().gameTime.minutes) + "\n";
+            menuText.text += "Infographics:\n";
             getRoomsInfo();
         }
     }
