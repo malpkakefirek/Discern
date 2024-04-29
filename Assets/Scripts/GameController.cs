@@ -80,43 +80,23 @@ public class GameController : MonoBehaviour
         }
 
         gameTime.UpdateTime();
-        //SetMoonSunRotation();
         SetSkyRotation();
     }
     public void SetSkyRotation()
     {
-        Vector3 currentRotation = sky.transform.eulerAngles;
         float timeFraction = (float)(gameTime.hours * 60 + gameTime.minutes) / (float)(60 * 24);
         float angle = 360f * timeFraction;
-        // Adjust angle to account for sunrise at 12:00
         angle -= 90f;
 
-        // Ensure the angle stays within the range of 0 to 360
         if (angle < 0f)
             angle += 360f;
-        Debug.Log("timeFract: "+timeFraction+" | Angle: " + angle);
+        //Debug.Log("timeFract: "+timeFraction+" | Angle: " + angle);
 
-        currentRotation.x = angle;
-        currentRotation.y = 0;
-        currentRotation.z = 0;
-        sky.transform.eulerAngles = currentRotation;
-    }
-    public void SetMoonSunRotation()
-    {
-        // Moon
-        Vector3 currentRotation = moon.transform.eulerAngles;
-        currentRotation.x = 360 * (float)(gameTime.hours * 60 + gameTime.minutes) / (float)(60 * 24);
-        currentRotation.y = -130f;
-        currentRotation.z = -356.644f;
-        moon.transform.eulerAngles = currentRotation;
-        // Sun
-        currentRotation = sun.transform.eulerAngles;
-        currentRotation.x = 360 * (float)(gameTime.hours * 60 + gameTime.minutes) / (float)(60 * 24);
-        currentRotation.y = -512.5f;
-        currentRotation.z = -37.644f;
-        sun.transform.eulerAngles = currentRotation;
-        // Log
-        Debug.Log("Set Moon and Sun rotation to " + currentRotation.x + " degrees");
+        Quaternion currentRotation = sky.transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(angle, 0f, 0f);
+        Quaternion newRotation = Quaternion.Lerp(currentRotation, targetRotation, Time.deltaTime);
+
+        sky.transform.rotation = newRotation;
     }
 
     private void spawnAnomaly()
