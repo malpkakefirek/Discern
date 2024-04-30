@@ -22,15 +22,17 @@ public class PhoneScript : MonoBehaviour
     [SerializeField] Color reportingFailColor;
     [SerializeField] float reportingFailTime = 2f;
     [SerializeField] GameObject reportingPanel;
+
     private bool phoneUp = false;
-
-    private List<GameObject> rooms;
+    private bool selectedRoom = false;
+    private bool isReporting = false;
+    private bool cooldownPassed = false; // temp fix for immediate anomaly selection
     private int index;
-
-    //private List<GameObject> availableRooms;
-    //private Dictionary<KeyCode, GameObject> roomKeyBindings = new Dictionary<KeyCode, GameObject>();
-    //private Dictionary<KeyCode, string> anomalyKeyBindings = new Dictionary<KeyCode, string>();
-
+    private int selectedRoomIndex = 0;
+    private string selectedAnomaly;
+    private TextMeshProUGUI anomalyPanelText;
+    private TextMeshProUGUI reportingPanelText;
+    private List<GameObject> rooms;
     private string[] anomalies = {
         "increased size",
         "decreased size",
@@ -46,73 +48,17 @@ public class PhoneScript : MonoBehaviour
         "room anomaly"
     };
 
-    // private TextMeshProUGUI roomPanelText;
-    private TextMeshProUGUI anomalyPanelText;
-    private TextMeshProUGUI reportingPanelText;
-    //private string listOfAnomalies;
-    private bool selectedRoom = false;
-    private int selectedRoomIndex = 0;
-    private string selectedAnomaly;
-    private bool isReporting = false;
-    private bool cooldownPassed = false; // cooldown to fix an issue with immediate anomaly selection
-
     void Start()
     {
-        //availableRooms = new List<GameObject>(GameObject.FindGameObjectsWithTag("AnomalyRoom"));
-
-        // roomPanelText = roomPanel.GetComponentInChildren<TextMeshProUGUI>();
-
         anomalyPanelText = anomalyPanel.GetComponentInChildren<TextMeshProUGUI>();
-
         reportingPanelText = reportingPanel.GetComponentInChildren<TextMeshProUGUI>();
 
         rooms = new List<GameObject>(GameObject.FindGameObjectsWithTag("AnomalyRoom").OrderBy(p => p.name).ToList());
-        // refreshTextRooms();
         refreshTextAnomalies();
         anomalyPanel.SetActive(false);
         roomPanel.SetActive(true);
-
-        /*
-        for (int i = 0; i < availableRooms.Count; i++)
-        {
-            KeyCode roomKey = GetObjectKeyCode(i);
-            roomKeyBindings.Add(roomKey, availableRooms[i]);
-        }
-
-        foreach (var room in roomKeyBindings)
-        {
-            roomPanelText.text += room.Key + " " + room.Value.name + "\n";
-        }
-
-        for (int i = 0; i < anomalies.Length; i++)
-        {
-            KeyCode anomalyKey = GetObjectKeyCode(i);
-            anomalyKeyBindings.Add(anomalyKey, anomalies[i]);
-        }
-
-        foreach (var anomaly in anomalyKeyBindings)
-        {
-            listOfAnomalies += anomaly.Key + " " + anomaly.Value + "\n";
-        }
-        */
-
     }
 
-    // private void refreshTextRooms()
-    // {
-    //     roomPanelText.text = "";
-    //     for (int i = 0; i < rooms.Length; i++)
-    //     {
-    //         if (i == index)
-    //         {
-    //             roomPanelText.text += "<color=yellow>" + rooms[i].name + "</color>\n";
-    //         }
-    //         else
-    //         {
-    //             roomPanelText.text += rooms[i].name + "\n";
-    //         }
-    //     }
-    // }
     private void refreshTextAnomalies()
     {
         anomalyPanelText.text = "Press Q to go back. \n\nSelected Room: " + rooms[selectedRoomIndex].name + "\n\nAnomalies: \n";
@@ -179,63 +125,15 @@ public class PhoneScript : MonoBehaviour
             return;
         }
 
-        if (!selectedRoom)
+        // Anomaly Selection
+        if (selectedRoom)
         {
-
-            // if (Input.GetKeyDown(KeyCode.UpArrow) && index != 0)
-            // {
-            //     index -= 1;
-            //     // refreshTextRooms();
-            // }
-            // if (Input.GetKeyDown(KeyCode.DownArrow) && index != rooms.Length - 1)
-            // {
-            //     index += 1;
-            //     // refreshTextRooms();
-            // }
-
-            // if (Input.GetKeyDown(KeyCode.Return))
-            // {
-            //     selectedRoomIndex = index;
-            //     index = 0;
-            //     anomalyPanel.SetActive(true);
-            //     roomPanel.SetActive(false);
-            //     selectedRoom = true;
-            //     refreshTextAnomalies();
-            //     Debug.Log("Selected room: " + rooms[selectedRoomIndex].name);
-            // }
-            /*
-            foreach (var kvp in roomKeyBindings)
-            {
-                if (Input.GetKeyDown(kvp.Key))
-                {
-                    selectedRoom = kvp.Value;
-
-                    anomalyPanel.SetActive(true);
-
-                    roomPanel.SetActive(false);
-
-                    anomalyPanelText.text = "Press Q to go back. \n\nSelected Room: " + selectedRoom.name
-                     + "\n\nAnomalies: \n" + listOfAnomalies;
-
-                    Debug.Log("Selected room: " + selectedRoom.name);
-                }
-            }
-            */
-        }
-        else
-        {
-
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 selectedRoom = false;
-
                 anomalyPanel.SetActive(false);
-
                 roomPanel.SetActive(true);
-
                 index = 0;
-
-                // refreshTextRooms();
             }
 
             if (Input.GetKeyDown(KeyCode.UpArrow) && index != 0)
@@ -243,6 +141,7 @@ public class PhoneScript : MonoBehaviour
                 index -= 1;
                 refreshTextAnomalies();
             }
+
             if (Input.GetKeyDown(KeyCode.DownArrow) && index != anomalies.Length - 1)
             {
                 index += 1;
@@ -257,46 +156,19 @@ public class PhoneScript : MonoBehaviour
                 //gameController.attempAnomalyFix(rooms[selectedRoomIndex], selectedAnomaly);
 
                 selectedRoom = false;
-
                 anomalyPanel.SetActive(false);
                 roomPanel.SetActive(false);
 
                 showReportingPanel();
 
-
                 index = 0;
                 cooldownPassed = false;
-
-                // refreshTextRooms();
             }
             else
             {
                 cooldownPassed = true;
             }
-
-            /*
-            foreach (var kvp in anomalyKeyBindings)
-            {
-                if (Input.GetKeyDown(kvp.Key))
-                {
-                    selectedAnomaly = kvp.Value;
-
-                    gameController.attempAnomalyFix(selectedRoom, selectedAnomaly);
-
-                    selectedRoom = null;
-
-                    anomalyPanel.SetActive(false);
-
-                    roomPanel.SetActive(true);
-
-                }
-            }
-            */
-
-
         }
-
-
     }
 
     private void showReportingPanel()
@@ -305,9 +177,9 @@ public class PhoneScript : MonoBehaviour
         reportingPanelText.text = reporting;
         reportingPanel.SetActive(true);
         //Debug.Log(reporting);
-        Invoke("addDot", reportingTime / 4f);
-        Invoke("addDot", 2*reportingTime / 4f);
-        Invoke("addDot", 3*reportingTime / 4f);
+        Invoke("addDot", reportingTime * 1/4f);
+        Invoke("addDot", reportingTime * 2/4f);
+        Invoke("addDot", reportingTime * 3/4f);
         Invoke("showReportingAfter", reportingTime);
     }
     private void addDot()
@@ -347,17 +219,5 @@ public class PhoneScript : MonoBehaviour
         roomPanel.SetActive(true);
         isReporting = false;
     }
-    /*
-        KeyCode GetObjectKeyCode(int roomIndex)
-        {
-            if (roomIndex < 9)
-            {
-                return KeyCode.Alpha1 + roomIndex;
-            }
-            else
-            {
-                return KeyCode.F1 + (roomIndex - 9);
-            }
-        }*/
 }
 
