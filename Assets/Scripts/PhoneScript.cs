@@ -25,11 +25,11 @@ public class PhoneScript : MonoBehaviour
     [SerializeField] Color reportingFailColor;
     [SerializeField] float reportingFailTime = 2f;
     [SerializeField] GameObject reportingPanel;
+    [SerializeField] private TextMeshProUGUI clock;
 
     private bool phoneUp = false;
     private bool selectedRoom = false;
     private bool isReporting = false;
-    private int index;
     private int selectedRoomIndex = 0;
     private string selectedAnomaly;
     private TextMeshProUGUI reportingPanelText;
@@ -87,8 +87,23 @@ public class PhoneScript : MonoBehaviour
         showReportingPanel();
     }
 
+    string ParseTime(int time)
+    {
+        string parsedTime = "";
+
+        if (time < 10)
+        {
+            parsedTime += "0";
+        }
+
+        parsedTime += time;
+        return parsedTime;
+    }
+
     void Update()
     {
+        clock.text = ParseTime(gameController.gameTime.hours) + ":" + ParseTime(gameController.gameTime.minutes);
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (phoneUp)
