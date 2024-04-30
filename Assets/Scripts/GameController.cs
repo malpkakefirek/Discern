@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using OccaSoftware.SuperSimpleSkybox.Runtime;
 using UnityEngine.ProBuilder.Shapes;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class GameController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameController : MonoBehaviour
     [SerializeField] int anomalySpawnTimeMax = 45;
     [SerializeField] float failCondition = 0.5f;
     [SerializeField] GameObject player;
+    [SerializeField] GameObject Torch;
 
     [SerializeField] GameObject moon;
     [SerializeField] GameObject sun;
@@ -83,6 +85,11 @@ public class GameController : MonoBehaviour
 
         gameTime.UpdateTime();
         SetSkyRotation();
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            Torch.SetActive(!Torch.activeSelf);
+        }
     }
     public void SetSkyRotation()
     {
