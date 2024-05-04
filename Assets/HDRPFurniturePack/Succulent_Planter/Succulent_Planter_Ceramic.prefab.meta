@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9566118a308257f48b491bc9272d187c
+timeCreated: 1527662547
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 153946
+  packageName: HDRP Furniture Pack
+  packageVersion: 1.0
+  assetPath: Assets/HDRPFurniturePack/Succulent_Planter/Succulent_Planter_Ceramic.prefab
+  uploadId: 337493

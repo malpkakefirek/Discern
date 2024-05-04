@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e8aa619d92aff8245b481c21fa35748e
+timeCreated: 1504695350
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 153946
+  packageName: HDRP Furniture Pack
+  packageVersion: 1.0
+  assetPath: Assets/HDRPFurniturePack/Dining_Chair/Materials/Dining_Chair_Wood_natural.mat
+  uploadId: 337493

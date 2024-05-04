@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 50bdb369bd551a84689fb7a61f545aff
+timeCreated: 1531376984
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 153946
+  packageName: HDRP Furniture Pack
+  packageVersion: 1.0
+  assetPath: Assets/HDRPFurniturePack/Wall_Decoration_Art_Zebra/Materials/Wall_Decoration_Art_Zebra.mat
+  uploadId: 337493

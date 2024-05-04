@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0c5b0a51c2af472488b193771f362ef3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 215522
+  packageName: Stylized Textures Mini Set
+  packageVersion: 1.0.0
+  assetPath: Assets/Ouroboros/Stylized Textures - Mini Set/Demo/Sources/Rotator.cs
+  uploadId: 488279

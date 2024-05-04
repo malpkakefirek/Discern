@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 75e47a0aa51d4d94ca3a57b0a86ca823
+timeCreated: 1504785011
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 153946
+  packageName: HDRP Furniture Pack
+  packageVersion: 1.0
+  assetPath: Assets/HDRPFurniturePack/Sofa_SL03_Allemuir_Stirling/Materials/Sofa_SL03_Fabric_Dark_Grey.mat
+  uploadId: 337493
