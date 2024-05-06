@@ -14,8 +14,10 @@ public class GuardController : MonoBehaviour
     [SerializeField] float deathProximity = 1.5f;
     [SerializeField] float speed = 4.5f;
     [SerializeField] float acceleration = 1f;
+    [SerializeField] GameFinished gameFinished;
 
     private float guardHeight;
+    private bool playerCaught;
 
     public NavMeshAgent agent;
     // Start is called before the first frame update
@@ -45,9 +47,10 @@ public class GuardController : MonoBehaviour
             agent.speed += acceleration * Time.deltaTime;
 
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-            if (distanceToPlayer <= deathProximity)
+            if (distanceToPlayer <= deathProximity && !playerCaught)
             {
-                Debug.LogError("Player was caught by the guard!");
+                playerCaught = true;
+                gameFinished.LoseGame("Player was caught by the guard!");
             }
         }
         else
