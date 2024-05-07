@@ -21,10 +21,10 @@ MonoBehaviour:
     value: 7
   maximumIterationCount:
     overrideState: 1
-    value: 64
+    value: 32
   resolution:
     overrideState: 1
-    value: 1
+    value: 0
   thickness:
     overrideState: 1
     value: 16
@@ -1434,7 +1434,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.45
+    value: 1
   color:
     overrideState: 0
     value: {r: 0, g: 0, b: 0, a: 1}
