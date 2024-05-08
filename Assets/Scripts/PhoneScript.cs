@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -34,6 +33,7 @@ public class PhoneScript : MonoBehaviour
     private string selectedAnomaly;
     private TextMeshProUGUI reportingPanelText;
     private GameObject selectedRoomButton;
+    private GameObject selectedAnomalyButton;
     private List<GameObject> rooms;
     private string[] anomalies = {
         "size change",
@@ -52,6 +52,9 @@ public class PhoneScript : MonoBehaviour
         anomalyPanel.SetActive(false);
         roomPanel.SetActive(true);
         phoneMenu.SetActive(false);
+
+        selectedRoomButton = defaultRoomButton.gameObject;
+        selectedAnomalyButton = defaultAnomalyButton.gameObject;
     }
 
     public void SelectRoom(int roomNumber)
@@ -78,6 +81,9 @@ public class PhoneScript : MonoBehaviour
         {
             return;
         }
+
+        selectedRoomButton = defaultRoomButton.gameObject;
+        selectedAnomalyButton = defaultAnomalyButton.gameObject;
 
         isReporting = true;
         selectedAnomaly = anomalies[anomalyNumber];
@@ -106,25 +112,47 @@ public class PhoneScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            if (phoneUp)
+            if (phoneUp)    // Close the phone
             {
                 phoneUp = false;
                 phoneMenu.SetActive(false);
-                anomalyPanel.SetActive(false);
-                roomPanel.SetActive(false);
+
+                if (!isReporting)
+                {
+                    if (selectedRoom)
+                    {
+                        selectedAnomalyButton = EventSystem.current.currentSelectedGameObject;
+                    }
+                    else
+                    {
+                        selectedRoomButton = EventSystem.current.currentSelectedGameObject;
+                    }
+                }
+
                 Debug.Log("Phone down.");
             }
-            else
+            else    // Open the phone
             {
                 phoneUp = true;
                 phoneMenu.SetActive(true);
-                anomalyPanel.SetActive(false);
-                roomPanel.SetActive(!isReporting);
-                reportingPanel.SetActive(isReporting);
-                defaultRoomButton.Select();
+
+                // Bring back button focus
+                if (!isReporting)
+                {
+                    if (selectedRoom)    // Anomaly selection screen
+                    {
+                        selectedAnomalyButton.GetComponent<Button>().Select();
+                    }
+                    else    // Room selection screen
+                    {
+                        selectedRoomButton.GetComponent<Button>().Select();
+                    }
+                }
+
                 Debug.Log("Phone up.");
             }
         }
+
         if (isReporting)
         {
             return;
@@ -142,6 +170,7 @@ public class PhoneScript : MonoBehaviour
             anomalyPanel.SetActive(false);
             roomPanel.SetActive(true);
             selectedRoomButton.GetComponent<Button>().Select();
+            selectedAnomalyButton = defaultAnomalyButton.gameObject;
         }
     }
 
@@ -194,7 +223,10 @@ public class PhoneScript : MonoBehaviour
         reportingPanel.SetActive(false);
         roomPanel.SetActive(true);
         isReporting = false;
+
+        phoneMenu.SetActive(true);
         defaultRoomButton.Select();
+        phoneMenu.SetActive(phoneUp);
     }
 }
 
