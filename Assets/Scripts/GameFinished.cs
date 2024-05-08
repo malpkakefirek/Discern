@@ -11,6 +11,7 @@ public class GameFinished : MonoBehaviour
     [SerializeField] TextMeshProUGUI bigHeader;
     [SerializeField] TextMeshProUGUI smallHeader;
     [SerializeField] MonoBehaviour fpsController;
+    [SerializeField] GameController gameController;
 
     public void FinishGame(string causeMessage){
         
@@ -42,5 +43,12 @@ public class GameFinished : MonoBehaviour
 
         bigHeader.text = "You Won";
         smallHeader.text = causeMessage;
+    }
+
+    public void Update(){
+        if (gameController.gameTime.hours == 6) {
+            
+            WinGame("All of the anomalies have been found");
+        }
     }
 }
