@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     [SerializeField] int anomalySpawnTimeMin = 15;
     [SerializeField] int anomalySpawnTimeMax = 45;
     [SerializeField] float failCondition = 0.5f;
+    [SerializeField] GameFinished gameFinished;
     [SerializeField] GameObject player;
     [SerializeField] GameObject Torch;
 
@@ -123,7 +124,7 @@ public class GameController : MonoBehaviour
                 float ratio = (float)totalAnomalies / roomsCount;
                 if (ratio > failCondition)
                 {
-                    Debug.LogError("Player died after new anomaly spawned");
+                    gameFinished.LoseGame("Anomalies have taken over the office");
                 }
             }
         }

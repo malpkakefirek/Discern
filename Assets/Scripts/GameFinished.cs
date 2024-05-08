@@ -10,8 +10,8 @@ public class GameFinished : MonoBehaviour
     [SerializeField] MonoBehaviour phoneMenu;
     [SerializeField] TextMeshProUGUI bigHeader;
     [SerializeField] TextMeshProUGUI smallHeader;
-
-
+    [SerializeField] MonoBehaviour fpsController;
+    [SerializeField] GameController gameController;
 
     public void FinishGame(string causeMessage){
         
@@ -21,9 +21,10 @@ public class GameFinished : MonoBehaviour
         pauseMenu.enabled = false;
         phoneMenu.enabled = false;
 
+        fpsController.enabled = false;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
 
         Debug.Log("Player lost | Cause: " + causeMessage);
     }
@@ -34,5 +35,20 @@ public class GameFinished : MonoBehaviour
 
         bigHeader.text = "You Lose";
         smallHeader.text = causeMessage;
+    }
+
+    public void WinGame(string causeMessage){
+
+        FinishGame(causeMessage);
+
+        bigHeader.text = "You Won";
+        smallHeader.text = causeMessage;
+    }
+
+    public void Update(){
+        if (gameController.gameTime.hours == 6) {
+            
+            WinGame("All of the anomalies have been found");
+        }
     }
 }
