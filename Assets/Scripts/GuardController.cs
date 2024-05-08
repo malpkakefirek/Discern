@@ -14,18 +14,27 @@ public class GuardController : MonoBehaviour
     [SerializeField] float deathProximity = 1.5f;
     [SerializeField] float speed = 4.5f;
     [SerializeField] float acceleration = 1f;
+    [SerializeField] private float m_StepInterval;
+    [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
     [SerializeField] GameFinished gameFinished;
 
+    private AudioSource m_AudioSource;
     private float guardHeight;
     private bool playerCaught;
+    private float m_StepCycle;
+    private float m_NextStep;
 
     public NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
     {
+        m_AudioSource = GetComponent<AudioSource>();
         guardHeight = GetComponent<Collider>().bounds.size.y;
         torchlight.spotAngle = detectionAngle;
         agent.speed = speed;
+
+        m_StepCycle = 0f;
+        m_NextStep = m_StepCycle/2f;
     }
 
     private float lastCalledTime;
@@ -80,6 +89,41 @@ public class GuardController : MonoBehaviour
         }
 
     }
+
+    void FixedUpdate()
+    {
+        ProgressStepCycle(agent.speed);
+    }
+
+    private void ProgressStepCycle(float speed)
+    {
+        if (agent.velocity.sqrMagnitude > 0)
+        {
+            m_StepCycle += (agent.velocity.magnitude + speed)*Time.fixedDeltaTime;
+        }
+
+        if (!(m_StepCycle > m_NextStep))
+        {
+            return;
+        }
+
+        m_NextStep = m_StepCycle + m_StepInterval;
+
+        PlayFootStepAudio();
+    }
+
+    private void PlayFootStepAudio()
+    {
+        // pick & play a random footstep sound from the array,
+        // excluding sound at index 0
+        int n = Random.Range(1, m_FootstepSounds.Length);
+        m_AudioSource.clip = m_FootstepSounds[n];
+        m_AudioSource.PlayOneShot(m_AudioSource.clip);
+        // move picked sound to index 0 so it's not picked next time
+        m_FootstepSounds[n] = m_FootstepSounds[0];
+        m_FootstepSounds[0] = m_AudioSource.clip;
+    }
+
 /*    private bool isChasing()
     {
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
