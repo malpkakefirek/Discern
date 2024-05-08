@@ -8,6 +8,7 @@ public class AnomalyRoom : MonoBehaviour
     private string postAnomalyTag = "AnomalyObjectPost";
     private GameObject[] anomalyObjects;
     public Dictionary<Transform, List<Transform>> anomalies;
+    public Transform lastAnomaly = null;
     public Transform activeAnomaly = null;
     public string activeAnomalyName = null;
 
@@ -100,11 +101,13 @@ public class AnomalyRoom : MonoBehaviour
         if (anomalies.Count > 0)
         {
             Collider[] colliders = gameObject.GetComponents<Collider>();
+
             if (colliders == null)
             {
                 Debug.LogWarning(gameObject.name + " does not have any Colliders!");
                 return false;
             }
+
             foreach (Collider collider in colliders)
             {
                 if (collider.bounds.Contains(playerPosition))
@@ -113,10 +116,40 @@ public class AnomalyRoom : MonoBehaviour
                     return false;
                 }
             }
-            (Transform randomAnomalyPre, List<Transform> anomalyPost) = anomalies.ElementAt(Random.Range(0, anomalies.Count));
+
+            Transform randomAnomalyPre;
+            List<Transform> anomalyPost;
+
+            if (anomalies.Count > 1)
+            {
+                while (true)
+                {
+                    (randomAnomalyPre, anomalyPost) = anomalies.ElementAt(Random.Range(0, anomalies.Count));
+
+                    if (!lastAnomaly)
+                    {
+                        Debug.Log("Last anomaly is null");
+                        break;
+                    }
+
+                    Debug.Log("Last anomaly object: " + lastAnomaly.name + " | Randomized anomaly object: " + randomAnomalyPre.name);
+                    if (randomAnomalyPre.name != lastAnomaly.name)
+                    {
+                        break;
+                    }
+                }
+            }
+            else    // If there is only one anomaly PRE, no need to randomize
+            {
+                (randomAnomalyPre, anomalyPost) = anomalies.ElementAt(0);
+            }
+
             Transform randomAnomalyPost = anomalyPost[Random.Range(0, anomalyPost.Count)];
+
             activeAnomaly = randomAnomalyPre;
             activeAnomalyName = randomAnomalyPost.name;
+            lastAnomaly = randomAnomalyPre;
+
             randomAnomalyPre.gameObject.SetActive(false);
             randomAnomalyPost.gameObject.SetActive(true);
             Debug.Log("Summoned anomaly " + randomAnomalyPost.name + " on " + randomAnomalyPre.name + " in room " + name);
