@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour
 
         public void Initialize()
         {
-            raw = Time.time;
+            raw = 0;
             UpdateTime();
         }
         public void UpdateTime()
