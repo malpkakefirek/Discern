@@ -25,7 +25,7 @@ public class CutsceneController : MonoBehaviour
     {
         yield return null;
 
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(GAMEPLAY_SCENE);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(GAMEPLAY_SCENE, LoadSceneMode.Single);
         asyncOperation.allowSceneActivation = false;
         
         while (!asyncOperation.isDone)

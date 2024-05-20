@@ -22,9 +22,9 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject sky;
 
 
-    private int timeToNextAnomaly = 30;
-    private int totalAnomalies = 0;
-    private int foundAnomalies = 0;
+    private int timeToNextAnomaly;
+    private int totalAnomalies;
+    private int foundAnomalies;
     private List<GameObject> availableRooms;
 
     //Time
@@ -72,13 +72,16 @@ public class GameController : MonoBehaviour
     {
         availableRooms = GameObject.FindGameObjectsWithTag("AnomalyRoom").ToList();
         roomsCount = availableRooms.Count;
+        totalAnomalies = 0;
+        foundAnomalies = 0;
+        timeToNextAnomaly = 60;
         gameTime.Initialize();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > timeToNextAnomaly)
+        if (gameTime.raw > timeToNextAnomaly)
         {
             spawnAnomaly();
             timeToNextAnomaly += Random.Range(anomalySpawnTimeMin, anomalySpawnTimeMax);
